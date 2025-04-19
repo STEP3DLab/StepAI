@@ -4,536 +4,303 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Мастер‑класс «Промтинжиниринг»</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root {
-      --primary: #4a00e0;
-      --accent: #ffd500;
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --muted: #666;
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-
-    * {
-      box-sizing: border-box;
+    .fade-in-up {
+      animation: fadeInUp 1s ease-out forwards;
     }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: linear-gradient(135deg, var(--primary), #8e2de2);
-      color: white;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    header img {
-      height: 40px;
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-    }
-
-    nav a {
-      color: white;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .burger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-      margin: 4px 0;
-    }
-
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      background: var(--primary);
-      padding: 1rem;
-    }
-
-    .mobile-nav a {
-      color: white;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      text-decoration: none;
-    }
-
-    h1, h2 {
-      text-align: center;
-    }
-
-    section {
-      max-width: 960px;
-      margin: auto;
-      padding: 2rem 1rem;
-    }
-
-    .calendar {
-      text-align: center;
-    }
-
-    .calendar .date {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    button {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #3700b3;
-    }
-
-    .cta-btn-fixed {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--primary);
-      color: white;
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 1rem 1.5rem;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(74, 0, 224, 0.6);
-      animation: pulse-glow 2s infinite;
-      z-index: 9999;
-    }
-
-    @keyframes pulse-glow {
-      0% { box-shadow: 0 0 12px rgba(74, 0, 224, 0.6); }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 12px rgba(74, 0, 224, 0.6); }
       50% { box-shadow: 0 0 24px rgba(138, 43, 226, 0.8); }
-      100% { box-shadow: 0 0 12px rgba(74, 0, 224, 0.6); }
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 1rem;
-      border: 1px solid #ccc;
-    }
-
-    th {
-      background: var(--primary);
-      color: white;
-    }
-
-    .quote {
-      font-style: italic;
-      border-left: 4px solid var(--primary);
-      padding-left: 1rem;
-      color: var(--muted);
-      margin: 1.5rem 0;
-    }
-
-    .icons-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1.5rem;
-      text-align: center;
-    }
-
-    .icons-row img {
-      width: 40px;
-      margin-bottom: 0.5rem;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
-      .burger {
-        display: flex;
-      }
-
-      .mobile-nav.active {
-        display: flex;
-      }
+    .glow {
+      animation: pulseGlow 2s infinite;
     }
   </style>
 </head>
-<body>
-  <header>
-    <img src="https://technopark-rgsu.ru/img/header-logo.webp" alt="Технопарк РГСУ">
-    <div class="burger" onclick="document.querySelector('.mobile-nav').classList.toggle('active')">
-      <div></div>
-      <div></div>
-      <div></div>
+<body class="bg-white text-gray-800 font-sans relative overflow-x-hidden">
+  <!-- Фоновое изображение -->
+  <div class="absolute inset-0 -z-10 opacity-20">
+    <img src="https://images.unsplash.com/photo-1607083206093-175f3b51f07b?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover" alt="Генеративный фон">
+  </div>
+
+  <!-- Шапка -->
+  <header class="sticky top-0 z-50 bg-gradient-to-r from-purple-800 to-indigo-700 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <img src="https://technopark-rgsu.ru/img/header-logo.webp" class="h-10" alt="Логотип">
+      <nav class="hidden md:flex space-x-6">
+        <a href="#calendar" class="hover:text-yellow-400">Календарь</a>
+        <a href="#tariffs" class="hover:text-yellow-400">Тарифы</a>
+        <a href="#payment" class="hover:text-yellow-400">Оплата</a>
+        <a href="#speaker" class="hover:text-yellow-400">Спикер</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#calendar">Календарь</a>
-      <a href="#tariffs">Тарифы</a>
-      <a href="#payment">Оплата</a>
-      <a href="#speaker">Спикер</a>
-    </nav>
   </header>
-  <div class="mobile-nav">
-    <a href="#calendar">Календарь</a>
-    <a href="#tariffs">Тарифы</a>
-    <a href="#payment">Оплата</a>
-    <a href="#speaker">Спикер</a>
-  </div>
 
-  <main>
-    <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мастер‑класс «Промтинжиниринг»</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #4a00e0;
-      --accent: #ffd500;
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --muted: #666;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: linear-gradient(135deg, var(--primary), #8e2de2);
-      color: white;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    header img {
-      height: 40px;
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-    }
-
-    nav a {
-      color: white;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .burger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-      margin: 4px 0;
-    }
-
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      background: var(--primary);
-      padding: 1rem;
-    }
-
-    .mobile-nav a {
-      color: white;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      text-decoration: none;
-    }
-
-    h1, h2 {
-      text-align: center;
-      animation: fadeIn 2s ease;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    section {
-      max-width: 960px;
-      margin: auto;
-      padding: 2rem 1rem;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .calendar {
-      text-align: center;
-    }
-
-    .calendar .date {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    button {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #3700b3;
-    }
-
-    .cta-btn-fixed {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--primary);
-      color: white;
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 1rem 1.5rem;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(74, 0, 224, 0.6);
-      animation: pulse-glow 2s infinite;
-      z-index: 9999;
-    }
-
-    @keyframes pulse-glow {
-      0% { box-shadow: 0 0 12px rgba(74, 0, 224, 0.6); }
-      50% { box-shadow: 0 0 24px rgba(138, 43, 226, 0.8); }
-      100% { box-shadow: 0 0 12px rgba(74, 0, 224, 0.6); }
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 1rem;
-      border: 1px solid #ccc;
-      backdrop-filter: blur(8px);
-    }
-
-    th {
-      background: rgba(74,0,224,0.8);
-      color: white;
-    }
-
-    .quote {
-      font-style: italic;
-      border-left: 4px solid var(--primary);
-      padding-left: 1rem;
-      color: var(--muted);
-      margin: 1.5rem 0;
-    }
-
-    .icons-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1.5rem;
-      text-align: center;
-    }
-
-    .icons-row img {
-      width: 40px;
-      margin-bottom: 0.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    .icons-row img:hover {
-      transform: scale(1.2);
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
-      .burger {
-        display: flex;
-      }
-
-      .mobile-nav.active {
-        display: flex;
-      }
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const sections = document.querySelectorAll("section");
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, { threshold: 0.1 });
-
-      sections.forEach(section => observer.observe(section));
-    });
-  </script>
-</head>
-<body>
-  <!-- Генеративный фон в стиле нейросети -->
-  <div style="position: absolute; inset: 0; z-index: -1; overflow: hidden;">
-    <img src="https://images.unsplash.com/photo-1624698965432-3b16cdcd5ae4?auto=format&fit=crop&w=1920&q=80" alt="AI Neural Background" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.15;">
-  </div>
-
-  <!-- Основной контент -->
-  <main>
-    <section>
-      <h1>Мастер‑класс «Промтинжинирнинг»</h1>
-      <p style="text-align: center">29 апреля 2025 — Москва / Онлайн</p>
-    </section>
-  </main>
-</body>
-</html>
-
-
-
-
-    <h1>StepAI</h1>
-
-    <section id="calendar" class="calendar">
-      <p class="date">29 апреля 2025</p>
-      <p><strong>Время: 19:00 — 20:30</strong></p>
-      <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Мастер‑класс+Искусство+промптов&dates=20250429T160000Z/20250429T173000Z','_blank')">
-        Добавить в календарь
-      </button>
+  <!-- Главный блок -->
+  <main class="max-w-4xl mx-auto px-4 py-12 space-y-16">
+    <section class="text-center fade-in-up">
+      <h1 class="text-4xl font-bold mb-4">Мастер‑класс «Промтинжиниринг»</h1>
+      <p class="text-lg">19:00 — 20:30 / техносреда</p>
     </section>
 
-    <section id="speaker">
+    <section id="calendar" class="text-center fade-in-up">
+  <div id="stage" class="mx-auto w-full h-[200px] relative z-10"></div>
+  <canvas id="text" width="700" height="200" style="display:none"></canvas>
+  <input id="input" type="text" value="29 апреля 2025" style="display:none">
+  <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Мастер‑класс+Искусство+промптов&dates=20250429T160000Z/20250429T173000Z','_blank')" class="mt-4 bg-purple-700 text-white font-semibold py-2 px-6 rounded-xl hover:bg-purple-900 transition">Добавить в календарь</button>
+</section>
 
-      <section id="speaker" style="display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;">
-      <div style="flex: 1 1 60%; min-width: 280px;">
-        <h2>Что? Где? Когда?</h2>
+    <section id="speaker" class="flex flex-wrap items-center gap-6 fade-in-up">
+      <div class="flex-1 min-w-[280px]">
+        <h2 class="text-2xl font-semibold mb-2">StepAI</h2>
         <p><strong>Ганьшин Владимир</strong> — руководитель Технопарка РГСУ, эксперт в области нейротехнологий и ИИ-образования.</p>
-        <p class="quote">«Промт — это мост между идеей и её реализацией. Мы научим вас управлять потенциалом нейросетей.»</p>
-        <p style="font-weight:600">📍 Москва, ул. Беговая, 12</p>
+        <p class="italic text-gray-600 border-l-4 border-purple-700 pl-4 my-4">«Промт — это мост между идеей и её реализацией. Мы научим вас управлять потенциалом нейросетей.»</p>
+        <p class="font-semibold">📍 Москва, ул. Беговая, 12</p>
       </div>
-      <div style="flex: 1 1 120px; text-align: center;">
-        <div id="avatar-story" style="position: relative; width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--accent); padding: 4px; animation: pulse-glow 2s infinite; cursor: pointer;">
-          <img src="https://i.pravatar.cc/100?img=68" alt="Ганьшин Владимир" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+      <div class="flex-1 text-center">
+        <div id="avatar-story" class="w-24 h-24 rounded-full border-4 border-yellow-400 p-1 mx-auto cursor-pointer glow">
+          <img src="https://i.pravatar.cc/100?img=68" alt="Ганьшин Владимир" class="w-full h-full object-cover rounded-full">
         </div>
       </div>
     </section>
 
-    <!-- Popup for Stories -->
-    <div id="story-popup" style="display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
-      <div style="width: 90vw; max-width: 400px; background: white; border-radius: 12px; overflow: hidden; position: relative;">
-        <video id="story-video" src="https://www.w3schools.com/html/mov_bbb.mp4" autoplay muted playsinline style="width: 100%; height: auto;"></video>
-        <button onclick="document.getElementById('story-popup').style.display='none'" style="position:absolute; top:10px; right:10px; background:#000; color:#fff; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">×</button>
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center fade-in-up">
+      <div class="p-4 bg-white rounded-xl shadow hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" class="w-10 mx-auto mb-2" alt="Кофе">
+        <p>Кофе-брейк включён</p>
       </div>
-    </div>
-
-    <script>
-      document.getElementById("avatar-story").addEventListener("click", function() {
-        const popup = document.getElementById("story-popup");
-        const video = document.getElementById("story-video");
-        popup.style.display = "flex";
-        video.currentTime = 0;
-        video.play();
-      });
-    </script>
-      <p class="quote">«Промт — это мост между идеей и её реализацией. Мы научим вас управлять потенциалом нейросетей.»</p>
-      <p style="text-align:center;font-weight:600">📍 Москва, ул. Беговая, 12</p>
+      <div class="p-4 bg-white rounded-xl shadow hover:scale-105 transition">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" class="w-10 mx-auto mb-2" alt="ChatGPT">
+        <p>Доступ к <strong>ChatGPT PRO</strong></p>
+      </div>
+      <div class="p-4 bg-white rounded-xl shadow hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-10 mx-auto mb-2" alt="Telegram">
+        <a href="https://t.me/shakhter_ai" target="_blank">AI-ассистент курса</a>
+      </div>
     </section>
 
-    <section class="icons-row">
-      <div><img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Кофе"/><p>Кофе-брейк включён</p></div>
-      <div><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"/><p>Доступ к <strong>ChatGPT PRO</strong></p></div>
-      <div><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"/><p><a href="https://t.me/shakhter_ai" target="_blank">AI-ассистент курса</a></p></div>
-    </section>
-
-    <section id="tariffs">
-      <h2>Что? Где? Когда?</h2>
-      <table>
-        <tr><th>Вариант</th><th>Описание</th><th>Стоимость</th></tr>
-        <tr><td>Очное участие</td><td>Мастер‑класс в аудитории</td><td>2 500 ₽</td></tr>
-        <tr><td>Онлайн-доступ</td><td>Участие через интернет</td><td>1 500 ₽</td></tr>
+    <section id="tariffs" class="fade-in-up">
+      <h2 class="text-2xl font-semibold text-center mb-4">Что? Где? Когда?</h2>
+      <table class="w-full border border-gray-200 shadow-md rounded-xl overflow-hidden">
+        <thead class="bg-purple-700 text-white">
+          <tr>
+            <th class="py-3 px-4">Вариант</th>
+            <th class="py-3 px-4">Описание</th>
+            <th class="py-3 px-4">Стоимость</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white hover:bg-gray-50">
+            <td class="py-3 px-4">Очное участие</td>
+            <td class="py-3 px-4">Мастер‑класс в аудитории</td>
+            <td class="py-3 px-4">2 500 ₽</td>
+          </tr>
+          <tr class="bg-white hover:bg-gray-50">
+            <td class="py-3 px-4">Онлайн-доступ</td>
+            <td class="py-3 px-4">Участие через интернет</td>
+            <td class="py-3 px-4">1 500 ₽</td>
+          </tr>
+        </tbody>
       </table>
     </section>
 
-    <section id="payment">
+    <section id="payment" class="text-center fade-in-up">
       <p>Оплата — картой, через СБП или QR-код.</p>
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="QR-код" style="width:100px; display:block; margin:auto;">
-      <br><br>
-      <button onclick="window.location.href='https://www.tinkoff.ru/pay'">Оплатить через Тинькофф</button>
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="QR-код" class="w-24 mx-auto my-4">
+      <button onclick="window.location.href='https://www.tinkoff.ru/pay'" class="bg-yellow-400 text-black font-bold py-2 px-6 rounded-xl hover:bg-yellow-500 transition">Оплатить через Тинькофф</button>
     </section>
-
-    <button class="cta-btn-fixed" onclick="window.location.href='#payment'">Записаться сейчас</button>
   </main>
+
+  <button onclick="window.location.href='#payment'" class="fixed bottom-6 right-6 bg-purple-700 text-white font-bold py-3 px-6 rounded-2xl glow shadow-lg hover:bg-purple-900 transition z-50">Записаться сейчас</button>
+
+  <!-- Popup Story -->
+  <div id="story-popup" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl overflow-hidden max-w-md w-full relative">
+      <video id="story-video" src="https://www.w3schools.com/html/mov_bbb.mp4" autoplay muted playsinline class="w-full"></video>
+      <button onclick="document.getElementById('story-popup').classList.add('hidden')" class="absolute top-2 right-2 bg-black text-white rounded-full w-8 h-8">×</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("avatar-story").addEventListener("click", function () {
+      const popup = document.getElementById("story-popup");
+      const video = document.getElementById("story-video");
+      popup.classList.remove("hidden");
+      video.currentTime = 0;
+      video.play();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("opacity-100");
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll("section").forEach(section => {
+      section.classList.add("opacity-0", "transition", "duration-1000");
+      observer.observe(section);
+    });
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+<script>
+// Тот же JavaScript-код, вставляемый в прошлом шаге для 3D-анимации текста
+let height, width, container, scene, camera, renderer, particles = [], mouseVector = new THREE.Vector3(0, 0, 0), mousePos = new THREE.Vector3(0, 0, 0), cameraLookAt = new THREE.Vector3(0, 0, 0), cameraTarget = new THREE.Vector3(0, 0 ,800), textCanvas, textCtx, textPixels = [], input;
+const colors = ['#F7A541', '#F45D4C', '#FA2E59', '#4783c3', '#9c6cb7'];
+function initStage() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  container = document.getElementById('stage');
+  window.addEventListener('resize', resize);
+  container.addEventListener('mousemove', mousemove);
+}
+function initScene() {
+  scene = new THREE.Scene();
+  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(width, height);
+  container.appendChild(renderer.domElement);
+}
+function randomPos(vector) {
+  const radius = width * 3;
+  const r = width + radius * Math.random();
+  const angle = Math.random() * Math.PI * 2;
+  vector.x = r * Math.cos(angle);
+  vector.y = r * Math.sin(angle);
+}
+function initCamera() {
+  const fieldOfView = 75, aspectRatio = width / height, nearPlane = 1, farPlane = 3000;
+  camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+  camera.position.z = 800;
+}
+function createLights() {
+  const shadowLight = new THREE.DirectionalLight(0xffffff, 2);
+  shadowLight.position.set(20, 0, 10);
+  scene.add(shadowLight);
+  const light = new THREE.DirectionalLight(0xffffff, .5);
+  light.position.set(-20, 0, 20);
+  scene.add(light);
+  const backLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  backLight.position.set(0, 0, -20);
+  scene.add(backLight);
+}
+function Particle() {
+  this.vx = Math.random() * 0.05;
+  this.vy = Math.random() * 0.05;
+}
+Particle.prototype.init = function(i) {
+  const particle = new THREE.Object3D();
+  const geometryCore = new THREE.BoxGeometry(20, 20, 20);
+  const materialCore = new THREE.MeshLambertMaterial({ color: colors[i % colors.length] });
+  const box = new THREE.Mesh(geometryCore, materialCore);
+  particle.targetPosition = new THREE.Vector3((textPixels[i].x - (width / 2)) * 4, (textPixels[i].y) * 5, -10 * Math.random() + 20);
+  randomPos(particle.position);
+  box.geometry.vertices.forEach(v => {
+    v.x += -10 + Math.random() * 20;
+    v.y += -10 + Math.random() * 20;
+    v.z += -10 + Math.random() * 20;
+  });
+  particle.add(box);
+  this.particle = particle;
+};
+Particle.prototype.updateRotation = function() {
+  this.particle.rotation.x += this.vx;
+  this.particle.rotation.y += this.vy;
+};
+Particle.prototype.updatePosition = function() {
+  this.particle.position.lerp(this.particle.targetPosition, 0.02);
+};
+function render() { renderer.render(scene, camera); }
+function updateParticles() {
+  particles.forEach(p => { p.updateRotation(); p.updatePosition(); });
+}
+function setParticles() {
+  textPixels.forEach((_, i) => {
+    if (particles[i]) {
+      particles[i].particle.targetPosition.x = (textPixels[i].x - (width / 2)) * 4;
+      particles[i].particle.targetPosition.y = (textPixels[i].y) * 5;
+      particles[i].particle.targetPosition.z = -10 * Math.random() + 20;
+    } else {
+      const p = new Particle();
+      p.init(i);
+      scene.add(p.particle);
+      particles[i] = p;
+    }
+  });
+  for (let i = textPixels.length; i < particles.length; i++) {
+    randomPos(particles[i].particle.targetPosition);
+  }
+}
+function initCanvas() {
+  textCanvas = document.getElementById('text');
+  textCanvas.width = width;
+  textCanvas.height = 200;
+  textCtx = textCanvas.getContext('2d');
+  textCtx.font = '700 100px Arial';
+  textCtx.fillStyle = '#555';
+}
+function initInput() {
+  input = document.getElementById('input');
+  input.style.display = 'none';
+  input.value = '29 апреля 2025';
+  updateText();
+}
+function updateText() {
+  const fontSize = Math.min(120, width / (input.value.length * 1.3));
+  textCtx.font = '700 ' + fontSize + 'px Arial';
+  textCtx.clearRect(0, 0, width, 200);
+  textCtx.textAlign = 'center';
+  textCtx.textBaseline = 'middle';
+  textCtx.fillText(input.value.toUpperCase(), width / 2, 50);
+  const pix = textCtx.getImageData(0, 0, width, 200).data;
+  textPixels = [];
+  for (let i = pix.length; i >= 0; i -= 4) {
+    if (pix[i] !== 0) {
+      const x = (i / 4) % width;
+      const y = Math.floor(Math.floor(i / width) / 4);
+      if (x % 6 === 0 && y % 6 === 0) {
+        textPixels.push({ x, y: 200 - y - 120 });
+      }
+    }
+  }
+  setParticles();
+}
+function animate() {
+  requestAnimationFrame(animate);
+  updateParticles();
+  camera.position.lerp(cameraTarget, 0.2);
+  camera.lookAt(cameraLookAt);
+  render();
+}
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+  textCanvas.width = width;
+  textCanvas.height = 200;
+  updateText();
+}
+function mousemove(e) {
+  const x = e.pageX - width / 2;
+  const y = e.pageY - height / 2;
+  cameraTarget.x = -x;
+  cameraTarget.y = y;
+}
+initStage();
+initScene();
+initCanvas();
+initCamera();
+createLights();
+initInput();
+animate();
+setTimeout(updateText, 40);
+</script>
 </body>
 </html>
-
-
