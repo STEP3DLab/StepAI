@@ -68,34 +68,102 @@
     </div>
   </section>
 
-  <!-- ===== ADVANTAGES ===== -->
-  <section id="advantages" class="py-16" data-animate>
-    <div class="container mx-auto px-4 max-w-5xl">
-      <h2 class="text-2xl font-semibold text-center mb-12">Что&nbsp;вы&nbsp;получите</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
-          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
-          <h3 class="font-semibold mb-2">Практика</h3>
-          <p class="text-gray-600">Разбор живых кейсов участников.</p>
-        </div>
-        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
-          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
-          <h3 class="font-semibold mb-2">Инструменты</h3>
-          <p class="text-gray-600">50 шаблонов промтов для разных задач.</p>
-        </div>
-        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
-          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
-          <h3 class="font-semibold mb-2">Поддержка</h3>
-          <p class="text-gray-600">Чат выпускников + помощь экспертов.</p>
-        </div>
-        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
-          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
-          <h3 class="font-semibold mb-2">Гарантия</h3>
-          <p class="text-gray-600">Возврат 100 % в течение 7 дней.</p>
-        </div>
+  <!-- ===== ADVANTAGES (with animated icons) ===== -->
+<section id="advantages" class="py-16" data-animate>
+  <div class="container mx-auto px-4 max-w-5xl">
+    <h2 class="text-3xl font-semibold text-center mb-12">Что&nbsp;вы&nbsp;получите</h2>
+
+    <!-- Load the Lottie web‑component once per page -->
+    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- PRACTICE -->
+      <div class="group text-center bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <lottie-player
+          src="https://assets5.lottiefiles.com/packages/lf20_w51pcehl.json"
+          background="transparent"
+          speed="1"
+          style="width:72px;height:72px;margin:0 auto 1rem"
+          loop
+          autoplay
+          class="motion-safe:group-hover:scale-110 motion-safe:duration-500">
+        </lottie-player>
+        <h3 class="font-semibold mb-2">Практика</h3>
+        <p class="text-gray-600">Разбор живых кейсов участников.</p>
+      </div>
+
+      <!-- TOOLS -->
+      <div class="group text-center bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <lottie-player
+          src="https://assets10.lottiefiles.com/packages/lf20_v7h78mxu.json"
+          background="transparent"
+          speed="1"
+          style="width:72px;height:72px;margin:0 auto 1rem"
+          loop
+          autoplay
+          class="motion-safe:group-hover:scale-110 motion-safe:duration-500">
+        </lottie-player>
+        <h3 class="font-semibold mb-2">Инструменты</h3>
+        <p class="text-gray-600">50 шаблонов промтов для разных задач.</p>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="group text-center bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <lottie-player
+          src="https://assets8.lottiefiles.com/packages/lf20_ojpwr25w.json"
+          background="transparent"
+          speed="1"
+          style="width:72px;height:72px;margin:0 auto 1rem"
+          loop
+          autoplay
+          class="motion-safe:group-hover:scale-110 motion-safe:duration-500">
+        </lottie-player>
+        <h3 class="font-semibold mb-2">Поддержка</h3>
+        <p class="text-gray-600">Чат выпускников + помощь экспертов.</p>
+      </div>
+
+      <!-- GUARANTEE -->
+      <div class="group text-center bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <lottie-player
+          src="https://assets1.lottiefiles.com/packages/lf20_amrcekev.json"
+          background="transparent"
+          speed="1"
+          style="width:72px;height:72px;margin:0 auto 1rem"
+          loop
+          autoplay
+          class="motion-safe:group-hover:scale-110 motion-safe:duration-500">
+        </lottie-player>
+        <h3 class="font-semibold mb-2">Гарантия</h3>
+        <p class="text-gray-600">Возврат 100 % в течение 7 дней.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<style>
+  /* Плавное появление секции при скролле */
+  [data-animate] {opacity:0; transform: translateY(40px); transition: all .7s ease-out;}
+  [data-animate].is-visible {opacity:1; transform: translateY(0);}
+</style>
+
+<script>
+  // Запускаем fade‑in, когда блок попадает в зону видимости
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('#advantages');
+
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          section.classList.add('is-visible');
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    io.observe(section);
+  });
+</script>
+
 
   <!-- ===== PROGRAM ===== -->
   <section id="program" class="bg-white py-16" data-animate>
