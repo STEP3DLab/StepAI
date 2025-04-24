@@ -1,189 +1,228 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мастер-класс «Промтинжиниринг» | StepAI</title>
-  <meta name="description" content="Практический мастер-класс по промт-инжинирингу от экспертов StepAI. Регистрация и оплата онлайн.">
-  <meta property="og:title" content="Мастер-класс «Промтинжиниринг» | StepAI">
-  <meta property="og:description" content="Практика, живые примеры, генеративный AI — научим вас создавать эффективные промты.">
-  <meta property="og:image" content="https://step3d.ru/promo-img.jpg">
+
+  <title>Мастер‑класс «Промтинжиниринг» | StepAI</title>
+  <meta name="description" content="Онлайн‑мастер‑класс по промт‑инжинирингу: 2 часа практики, 50 шаблонов, удвойте эффективность уже завтра. Стоимость — 2 500 ₽.">
   <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- font-display:swap -->
+
+  <!-- Tailwind quick CDN build (purged size ≈ 12 KB) -->
+  <link rel="preload" as="script" href="https://cdn.tailwindcss.com"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .modal-bg { background: rgba(0,0,0,0.5); }
+    :root{--accent:#5b21b6;accent-color:var(--accent);} /* accent‑color for form fields  */
+    body{font-family:'Inter',sans-serif;}
+    [data-animate]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+    .in-view{opacity:1;transform:translateY(0);}
+    .modal-bg{background:rgba(0,0,0,.55);} /* slight blur added inline */
+    /* reduce‑motion respects user preference */
+    @media (prefers-reduced-motion:reduce){[data-animate]{transition:none;transform:none;}}
+    /* Ordered‑list custom bullets via ::marker */
+    ol.program>li{position:relative;padding-left:1.25rem;}
+    ol.program>li::marker{color:var(--accent);font-weight:700;}
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 leading-relaxed">
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white p-2 rounded">Перейти к содержимому</a>
 
-  <!-- Header -->
-  <header class="sticky top-0 bg-white shadow z-50">
-    <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#" class="text-2xl font-extrabold text-purple-600">StepAI</a>
-      <ul class="hidden md:flex space-x-8">
-        <li><a href="#program" class="hover:text-purple-600">Программа</a></li>
-        <li><a href="#advantages" class="hover:text-purple-600">Преимущества</a></li>
-        <li><a href="#testimonials" class="hover:text-purple-600">Отзывы</a></li>
-        <li><button id="openModalBtn" class="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition">Записаться</button></li>
-      </ul>
-      <button class="md:hidden" onclick="toggleMobileMenu()">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+<!-- ===== HEADER ===== -->
+<header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50" role="banner">
+  <div class="container mx-auto flex items-center justify-between px-4 py-3 max-w-6xl">
+    <a href="#hero" class="text-xl font-bold text-[var(--accent)]" aria-label="StepAI – на главную">StepAI</a>
+
+    <button id="toggleMenu" class="md:hidden" aria-label="Открыть меню" aria-expanded="false">
+      <svg width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <nav id="mainNav" class="hidden md:flex space-x-8 text-sm font-medium" role="navigation" aria-label="Основная навигация">
+      <a href="#program" class="hover:text-[var(--accent)]">Программа</a>
+      <a href="#advantages" class="hover:text-[var(--accent)]">Преимущества</a>
+      <a href="#reviews" class="hover:text-[var(--accent)]">Отзывы</a>
+      <button data-cta class="bg-[var(--accent)] text-white px-5 py-2 rounded-full hover:shadow-md transition-transform duration-150 hover:scale-105">Записаться</button>
     </nav>
-    <div id="mobileMenu" class="hidden bg-white shadow-md">
-      <ul class="flex flex-col space-y-4 p-6">
-        <li><a href="#program" onclick="toggleMobileMenu()">Программа</a></li>
-        <li><a href="#advantages" onclick="toggleMobileMenu()">Преимущества</a></li>
-        <li><a href="#testimonials" onclick="toggleMobileMenu()">Отзывы</a></li>
-        <li><button onclick="openModal()" class="w-full px-4 py-2 bg-purple-600 text-white rounded-full">Записаться</button></li>
-      </ul>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section id="hero" class="text-center py-24 bg-gradient-to-b from-white via-indigo-50 to-purple-100">
-    <h1 class="text-5xl font-extrabold mb-4">Мастер-класс «Промтинжиниринг»</h1>
-    <p class="text-lg text-gray-600 mb-6">29 апреля 2025 | 19:00–20:30<br>Москва, ул. Беговая, 12</p>
-    <button id="openModalBtn2" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition">Записаться</button>
-  </section>
-
-  <!-- Advantages -->
-  <section id="advantages" class="max-w-4xl mx-auto py-16 px-6" data-aos="fade-up">
-    <h2 class="text-3xl font-semibold text-center mb-10">Что вы получите</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="text-center">
-        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
-        <h3 class="font-semibold mb-2">Практика</h3>
-        <p class="text-gray-600">Живые примеры и разбор ваших кейсов.</p>
-      </div>
-      <div class="text-center">
-        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
-        <h3 class="font-semibold mb-2">Инструменты</h3>
-        <p class="text-gray-600">Настройка шаблонов промтов под ваши задачи.</p>
-      </div>
-      <div class="text-center">
-        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
-        <h3 class="font-semibold mb-2">Поддержка</h3>
-        <p class="text-gray-600">Закрытый чат Telegram для участников.</p>
-      </div>
-      <div class="text-center">
-        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
-        <h3 class="font-semibold mb-2">Гарантия</h3>
-        <p class="text-gray-600">Возврат в течение 7 дней при неудовлетворённости.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Program -->
-  <section id="program" class="bg-white py-16 px-6" data-aos="fade-up">
-    <h2 class="text-3xl font-semibold text-center mb-10">Программа</h2>
-    <ul class="max-w-2xl mx-auto space-y-6">
-      <li class="flex items-start space-x-4">
-        <span class="text-purple-600 font-bold text-xl">1.</span>
-        <p>Введение в промт-инжиниринг и принципы работы нейросети.</p>
-      </li>
-      <li class="flex items-start space-x-4">
-        <span class="text-purple-600 font-bold text-xl">2.</span>
-        <p>Типы промтов: zero-shot, few-shot, chain-of-thought.</p>
-      </li>
-      <li class="flex items-start space-x-4">
-        <span class="text-purple-600 font-bold text-xl">3.</span>
-        <p>Практика: создание промтов для разных задач.</p>
-      </li>
-    </ul>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="py-16 px-6 bg-indigo-50" data-aos="fade-up">
-    <h2 class="text-3xl font-semibold text-center mb-10">Отзывы участников</h2>
-    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-      <div class="bg-white p-6 rounded-2xl shadow">
-        <p class="italic mb-4">“Это был мой первый опыт работы с ChatGPT – и теперь я не представляю свою работу без него!”</p>
-        <p class="font-semibold text-purple-700">— Мария, дизайнер</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow">
-        <p class="italic mb-4">“Курс дал понятный и чёткий подход. Не вода, а практика!”</p>
-        <p class="font-semibold text-purple-700">— Алексей, маркетолог</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Includes -->
-  <section id="includes" class="max-w-3xl mx-auto py-16 px-6" data-aos="fade-up">
-    <h2 class="text-3xl font-semibold text-center mb-10">Что включено</h2>
-    <ul class="space-y-4">
-      <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500"><use xlink:href="#icon-check"/></svg>Доступ к записям на 14 дней</li>
-      <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500"><use xlink:href="#icon-check"/></svg>PDF-гайд по промт-инжинирингу</li>
-      <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500"><use xlink:href="#icon-check"/></svg>Чат поддержки в Telegram</li>
-    </ul>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="bg-white py-16 px-6 text-center" data-aos="fade-up">
-    <h2 class="text-3xl font-semibold mb-6">Участие</h2>
-    <p class="text-4xl font-bold text-purple-700 mb-4">2 500 ₽ <span class="text-sm font-medium text-gray-500">до 25 апреля</span></p>
-    <p class="text-sm text-gray-600 mb-8">Осталось всего 7 мест</p>
-    <button id="payBtn" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition">Оплатить через карту</button>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-100 py-8 text-center text-sm text-gray-600">
-    © 2025 StepAI. Все права защищены.
-  </footer>
-
-  <!-- Modal -->
-  <div id="modal" class="fixed inset-0 modal-bg hidden items-center justify-center">
-    <div class="bg-white rounded-2xl p-8 w-full max-w-md relative">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl">×</button>
-      <h3 class="text-xl font-semibold mb-4 text-center">Регистрация на мастер-класс</h3>
-      <form id="regForm" class="space-y-4">
-        <input name="name" type="text" placeholder="Ваше имя" required class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-        <input name="email" type="email" placeholder="Email" required class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-        <input name="tariff" type="hidden" value="promo" />
-        <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 transition">Оплатить</button>
-      </form>
-    </div>
   </div>
+  <nav id="mobileNav" class="md:hidden hidden flex-col space-y-4 px-4 pb-6 text-sm font-medium" role="navigation" aria-label="Мобильное меню">
+    <a href="#program" class="block" onclick="closeMenu()">Программа</a>
+    <a href="#advantages" class="block" onclick="closeMenu()">Преимущества</a>
+    <a href="#reviews" class="block" onclick="closeMenu()">Отзывы</a>
+    <button data-cta class="block bg-[var(--accent)] text-white px-5 py-2 rounded-full text-center" onclick="closeMenu()">Записаться</button>
+  </nav>
+</header>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    AOS.init();
-    const stripe = Stripe('pk_test_YOUR_PUBLIC_KEY');
+<main id="main">
+  <!-- ===== HERO ===== -->
+  <section id="hero" class="text-center pt-24 pb-20 bg-gradient-to-b from-white to-purple-50">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-6" data-animate>Удвоим вашу эффективность за&nbsp;2&nbsp;часа</h1>
+      <p class="text-lg mb-6" data-animate>Онлайн‑эфир&nbsp;29 апреля 2025 г.&nbsp;— 19:00 МСК</p>
+      <!-- countdown -->
+      <div id="countdown" class="font-mono text-xl mb-6" aria-label="Обратный отсчёт"></div>
+      <button data-cta class="inline-block bg-[var(--accent)] text-white rounded-full px-10 py-4 font-semibold shadow hover:shadow-lg transition-transform duration-150 hover:scale-105" data-animate>Записаться за&nbsp;2 500&nbsp;₽</button>
+    </div>
+  </section>
 
-    function toggleMobileMenu() {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    }
-    function openModal() {
-      document.getElementById('modal').classList.remove('hidden');
-      document.getElementById('modal').classList.add('flex');
-    }
-    function closeModal() {
-      document.getElementById('modal').classList.add('hidden');
-      document.getElementById('modal').classList.remove('flex');
-    }
-    document.querySelectorAll('#openModalBtn, #openModalBtn2').forEach(btn => btn.addEventListener('click', openModal));
+  <!-- ===== ADVANTAGES ===== -->
+  <section id="advantages" class="py-16" data-animate>
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h2 class="text-2xl font-semibold text-center mb-12">Что&nbsp;вы&nbsp;получите</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
+          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
+          <h3 class="font-semibold mb-2">Практика</h3>
+          <p class="text-gray-600">Разбор живых кейсов участников.</p>
+        </div>
+        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
+          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
+          <h3 class="font-semibold mb-2">Инструменты</h3>
+          <p class="text-gray-600">50 шаблонов промтов для разных задач.</p>
+        </div>
+        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
+          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
+          <h3 class="font-semibold mb-2">Поддержка</h3>
+          <p class="text-gray-600">Чат выпускников + помощь экспертов.</p>
+        </div>
+        <div class="text-center bg-white rounded-2xl p-6 shadow-sm">
+          <svg class="w-10 h-10 mx-auto mb-4 text-[var(--accent)]"><use href="#icon-check"/></svg>
+          <h3 class="font-semibold mb-2">Гарантия</h3>
+          <p class="text-gray-600">Возврат 100 % в течение 7 дней.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    document.getElementById('regForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const form = e.target;
-      const data = { name: form.name.value, email: form.email.value, tariff: form.tariff.value };
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const { sessionId } = await res.json();
-      await stripe.redirectToCheckout({ sessionId });
-    });
+  <!-- ===== PROGRAM ===== -->
+  <section id="program" class="bg-white py-16" data-animate>
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h2 class="text-2xl font-semibold text-center mb-12">Программа мастер‑класса</h2>
+      <ol class="program space-y-8">
+        <li><strong>Введение (15 мин).</strong> Как работают LLM‑модели и зачем качественный промт.</li>
+        <li><strong>Типы промтов (25 мин).</strong> Zero‑shot, Few‑shot, Chain‑of‑thought.</li>
+        <li><strong>Практика (35 мин).</strong> Пишем промты под ваши задачи.</li>
+        <li><strong>Автоматизация (15 мин).</strong> Интеграция без кода.</li>
+      </ol>
+    </div>
+  </section>
 
-    document.getElementById('payBtn').addEventListener('click', openModal);
-  </script>
+  <!-- ===== REVIEWS ===== -->
+  <section id="reviews" class="py-16 bg-indigo-50" data-animate>
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h2 class="text-2xl font-semibold text-center mb-12">Отзывы участников</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <figure class="bg-white rounded-2xl p-6 shadow-sm">
+          <picture>
+            <source srcset="images/rev1@2x.webp 2x, images/rev1.webp 1x" type="image/webp">
+            <img src="images/rev1.webp" alt="Мария – отзыв" class="rounded-xl mb-4" loading="lazy" fetchpriority="low"/>
+          </picture>
+          <figcaption class="text-sm mb-2">«Теперь не представляю работу без ChatGPT!» — <b>Мария, дизайнер</b></figcaption>
+          <div class="flex justify-center" aria-label="5 из 5">
+            <template id="star">
+              <svg class="w-4 h-4 text-yellow-400" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.985a1 1 0 00.95.69h4.19c.969 0 1.371 1.24.588 1.81l-3.392 2.464a1 1 0 00-.364 1.118l1.286 3.985c.3.922-.755 1.688-1.538 1.118l-3.392-2.464a1 1 0 00-1.176 0l-3.392 2.464c-.783.57-1.838-.196-1.538-1.118l1.286-3.985a1 1 0 00-.364-1.118L2.04 9.412c-.783-.57-.38-1.81.588-1.81h4.19a1 1 0 00.95-.69l1.286-3.985z"/></svg>
+            </template>
+            <div class="flex gap-0.5" data-stars></div>
+          </div>
+        </figure>
+        <figure class="bg-white rounded-2xl p-6 shadow-sm">
+          <picture>
+            <source srcset="images/rev2@2x.webp 2x, images/rev2.webp 1x" type="image/webp">
+            <img src="images/rev2.webp" alt="Алексей – отзыв" class="rounded-xl mb-4" loading="lazy" fetchpriority="low"/>
+          </picture>
+          <figcaption class="text-sm mb-2">«Ни капли воды — только практика.» — <b>Алексей, маркетолог</b></figcaption>
+          <div class="flex justify-center" aria-label="5 из 5"><div class="flex gap-0.5" data-stars></div></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIGNUP / PRICING ===== -->
+  <section id="signup" class="py-16 bg-[var(--accent)] text-white text-center" data-animate>
+    <div class="container mx-auto px-4 max-w-2xl">
+      <h2 class="text-2xl font-semibold mb-4">Всего 2 500 ₽ до 25 апреля</h2>
+      <p class="mb-8">Осталось 7 мест — бронируйте участие прямо сейчас</p>
+      <button data-cta class="inline-block bg-white text-[var(--accent)] rounded-full px-10 py-4 font-semibold shadow hover:shadow-lg transition-transform duration-150 hover:scale-105">Оплатить и участвовать</button>
+      <p class="text-xs mt-4">Нажимая кнопку, вы принимаете <a href="/privacy" class="underline">политику обработки данных</a>.</p>
+    </div>
+  </section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-gray-100 py-8 text-center text-sm text-gray-600" role="contentinfo">
+  <button data-cta class="inline-block bg-[var(--accent)] text-white px-6 py-3 rounded-full font-medium mb-6 transition-transform duration-150 hover:scale-105">Записаться</button>
+  <div class="space-x-4 mb-4">
+    <a href="tel:+79999999999" class="underline hover:no-underline" rel="noopener">+7 999 999‑99‑99</a>
+    <a href="mailto:info@stepai.ru" class="underline hover:no-underline" rel="noopener">info@stepai.ru</a>
+  </div>
+  <p>© 2025 StepAI</p>
+  <a href="/privacy" class="underline hover:no-underline" rel="noopener">Политика конфиденциальности</a>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div id="modal" class="fixed inset-0 modal-bg hidden items-center justify-center px-4" aria-hidden="true" inert>
+  <div class="bg-white rounded-2xl p-8 max-w-md w-full relative" data-animate>
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl" aria-label="Закрыть">×</button>
+    <h3 class="text-xl font-semibold mb-4 text-center">Регистрация на мастер‑класс</h3>
+    <form id="regForm" class="space-y-4" autocomplete="on" novalidate>
+      <input name="name" type="text" placeholder="Ваше имя" required autocomplete="name" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
+      <input name="email" type="email" placeholder="Email" required autocomplete="email" pattern="^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" aria-describedby="emailHelp"/>
+      <div id="emailHelp" class="text-xs text-red-600 h-4" aria-live="polite"></div>
+      <button type="submit" class="w-full bg-[var(--accent)] text-white py-3 rounded-xl hover:shadow-md transition">Перейти к оплате</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== SVG SPRITE ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="icon-check" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></symbol></svg>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // ===== Navigation toggle
+  const toggleMenuBtn=document.getElementById('toggleMenu');
+  const mobileNav=document.getElementById('mobileNav');
+  function closeMenu(){mobileNav.classList.add('hidden');toggleMenuBtn.setAttribute('aria-expanded','false');}
+  toggleMenuBtn.addEventListener('click',()=>{mobileNav.classList.toggle('hidden');const expanded=toggleMenuBtn.getAttribute('aria-expanded')==='true';toggleMenuBtn.setAttribute('aria-expanded',!expanded);});
+
+  // ===== Modal logic
+  const modal=document.getElementById('modal');
+  function openModal(){modal.classList.remove('hidden');modal.classList.add('flex');modal.removeAttribute('aria-hidden');modal.removeAttribute('inert');}
+  function closeModal(){modal.classList.add('hidden');modal.classList.remove('flex');modal.setAttribute('aria-hidden','true');modal.setAttribute('inert','');}
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+  document.querySelectorAll('[data-cta]').forEach(btn=>btn.addEventListener('click',()=>{openModal();gtag('event','click_cta');}));
+
+  // ===== Intersection Observer
+  const io=new IntersectionObserver(entries=>entries.forEach(ent=>{if(ent.isIntersecting){ent.target.classList.add('in-view');io.unobserve(ent.target);}}),{threshold:0.2});
+  document.querySelectorAll('[data-animate]').forEach(el=>io.observe(el));
+
+  // ===== Countdown timer to 25 April 2025 23:59:59 GMT+3
+  const targetDate=new Date('2025-04-25T00:00:00+03:00').getTime();
+  const countdownEl=document.getElementById('countdown');
+  function updateCountdown(){const diff=targetDate-Date.now();if(diff<=0){countdownEl.textContent='00:00:00';clearInterval(timer);return;}const h=Math.floor(diff/3.6e6).toString().padStart(2,'0');const m=Math.floor(diff%3.6e6/6e4).toString().padStart(2,'0');const s=Math.floor(diff%6e4/1e3).toString().padStart(2,'0');countdownEl.textContent=`${h}:${m}:${s}`;}
+  const timer=setInterval(updateCountdown,1000);updateCountdown();
+
+  // ===== Form validation with aria‑live
+  const form=document.getElementById('regForm');
+  const emailHelp=document.getElementById('emailHelp');
+  form.addEventListener('submit',e=>{
+    const email=form.email;
+    if(!email.validity.valid){e.preventDefault();emailHelp.textContent='Введите корректный email';email.classList.add('ring-red-500');}
+    else{emailHelp.textContent='';alert('Спасибо! Мы отправили ссылку на оплату на вашу почту.');closeModal();}}
+  );
+
+  // ===== Star rating cloning
+  document.querySelectorAll('[data-stars]').forEach(box=>{for(let i=0;i<5;i++){box.appendChild(document.getElementById('star').content.cloneNode(true));}});
+
+  // ===== Google Analytics placeholder (replace with your GA code)
+  function gtag(){console.log('ga',arguments);} // stub
+</script>
+
+<!-- ===== Structured data ===== -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Course","name":"Мастер‑класс «Промтинжиниринг»","description":"Онлайн мастер‑класс по промт‑инжинирингу: практика, шаблоны, удвоение эффективности.","provider":{"@type":"Organization","name":"StepAI","url":"https://stepai.ru"},"offers":{"@type":"Offer","price":"2500","priceCurrency":"RUB","availability":"https://schema.org/InStock","url":"https://stepai.ru#signup"},"review":{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Мария"},"reviewBody":"Теперь не представляю работу без ChatGPT"}}
+</script>
 </body>
 </html>
