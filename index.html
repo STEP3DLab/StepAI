@@ -3,304 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мастер‑класс «Промтинжиниринг»</title>
+  <title>Мастер-класс «Промтинжиниринг» | StepAI</title>
+  <meta name="description" content="Практический мастер-класс по промт-инжинирингу от экспертов StepAI. Регистрация и оплата онлайн.">
+  <meta property="og:title" content="Мастер-класс «Промтинжиниринг» | StepAI">
+  <meta property="og:description" content="Практика, живые примеры, генеративный AI — научим вас создавать эффективные промты.">
+  <meta property="og:image" content="https://step3d.ru/promo-img.jpg">
+  <link rel="icon" href="/favicon.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in-up {
-      animation: fadeInUp 1s ease-out forwards;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 12px rgba(74, 0, 224, 0.6); }
-      50% { box-shadow: 0 0 24px rgba(138, 43, 226, 0.8); }
-    }
-    .glow {
-      animation: pulseGlow 2s infinite;
-    }
+    body { font-family: 'Inter', sans-serif; }
+    .modal-bg { background: rgba(0,0,0,0.5); }
   </style>
 </head>
-<body class="bg-white text-gray-800 font-sans relative overflow-x-hidden">
-  <!-- Фоновое изображение -->
-  <div class="absolute inset-0 -z-10 opacity-20">
-    <img src="https://images.unsplash.com/photo-1607083206093-175f3b51f07b?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover" alt="Генеративный фон">
-  </div>
+<body class="bg-gray-50 text-gray-800">
 
-  <!-- Шапка -->
-  <header class="sticky top-0 z-50 bg-gradient-to-r from-purple-800 to-indigo-700 text-white shadow-md">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <img src="https://technopark-rgsu.ru/img/header-logo.webp" class="h-10" alt="Логотип">
-      <nav class="hidden md:flex space-x-6">
-        <a href="#calendar" class="hover:text-yellow-400">Календарь</a>
-        <a href="#tariffs" class="hover:text-yellow-400">Тарифы</a>
-        <a href="#payment" class="hover:text-yellow-400">Оплата</a>
-        <a href="#speaker" class="hover:text-yellow-400">Спикер</a>
-      </nav>
+  <!-- Header -->
+  <header class="sticky top-0 bg-white shadow z-50">
+    <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-2xl font-extrabold text-purple-600">StepAI</a>
+      <ul class="hidden md:flex space-x-8">
+        <li><a href="#program" class="hover:text-purple-600">Программа</a></li>
+        <li><a href="#advantages" class="hover:text-purple-600">Преимущества</a></li>
+        <li><a href="#testimonials" class="hover:text-purple-600">Отзывы</a></li>
+        <li><button id="openModalBtn" class="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition">Записаться</button></li>
+      </ul>
+      <button class="md:hidden" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobileMenu" class="hidden bg-white shadow-md">
+      <ul class="flex flex-col space-y-4 p-6">
+        <li><a href="#program" onclick="toggleMobileMenu()">Программа</a></li>
+        <li><a href="#advantages" onclick="toggleMobileMenu()">Преимущества</a></li>
+        <li><a href="#testimonials" onclick="toggleMobileMenu()">Отзывы</a></li>
+        <li><button onclick="openModal()" class="w-full px-4 py-2 bg-purple-600 text-white rounded-full">Записаться</button></li>
+      </ul>
     </div>
   </header>
 
-  <!-- Главный блок -->
-  <main class="max-w-4xl mx-auto px-4 py-12 space-y-16">
-    <section class="text-center fade-in-up">
-      <h1 class="text-4xl font-bold mb-4">Мастер‑класс «Промтинжиниринг»</h1>
-      <p class="text-lg">19:00 — 20:30 / техносреда</p>
-    </section>
+  <!-- Hero -->
+  <section id="hero" class="text-center py-24 bg-gradient-to-b from-white via-indigo-50 to-purple-100">
+    <h1 class="text-5xl font-extrabold mb-4">Мастер-класс «Промтинжиниринг»</h1>
+    <p class="text-lg text-gray-600 mb-6">29 апреля 2025 | 19:00–20:30<br>Москва, ул. Беговая, 12</p>
+    <button id="openModalBtn2" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition">Записаться</button>
+  </section>
 
-    <section id="calendar" class="text-center fade-in-up">
-  <div id="stage" class="mx-auto w-full h-[200px] relative z-10"></div>
-  <canvas id="text" width="700" height="200" style="display:none"></canvas>
-  <input id="input" type="text" value="29 апреля 2025" style="display:none">
-  <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Мастер‑класс+Искусство+промптов&dates=20250429T160000Z/20250429T173000Z','_blank')" class="mt-4 bg-purple-700 text-white font-semibold py-2 px-6 rounded-xl hover:bg-purple-900 transition">Добавить в календарь</button>
-</section>
-
-    <section id="speaker" class="flex flex-wrap items-center gap-6 fade-in-up">
-      <div class="flex-1 min-w-[280px]">
-        <h2 class="text-2xl font-semibold mb-2">StepAI</h2>
-        <p><strong>Ганьшин Владимир</strong> — руководитель Технопарка РГСУ, эксперт в области нейротехнологий и ИИ-образования.</p>
-        <p class="italic text-gray-600 border-l-4 border-purple-700 pl-4 my-4">«Промт — это мост между идеей и её реализацией. Мы научим вас управлять потенциалом нейросетей.»</p>
-        <p class="font-semibold">📍 Москва, ул. Беговая, 12</p>
+  <!-- Advantages -->
+  <section id="advantages" class="max-w-4xl mx-auto py-16 px-6" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-center mb-10">Что вы получите</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center">
+        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
+        <h3 class="font-semibold mb-2">Практика</h3>
+        <p class="text-gray-600">Живые примеры и разбор ваших кейсов.</p>
       </div>
-      <div class="flex-1 text-center">
-        <div id="avatar-story" class="w-24 h-24 rounded-full border-4 border-yellow-400 p-1 mx-auto cursor-pointer glow">
-          <img src="https://i.pravatar.cc/100?img=68" alt="Ганьшин Владимир" class="w-full h-full object-cover rounded-full">
-        </div>
+      <div class="text-center">
+        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
+        <h3 class="font-semibold mb-2">Инструменты</h3>
+        <p class="text-gray-600">Настройка шаблонов промтов под ваши задачи.</p>
       </div>
-    </section>
-
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center fade-in-up">
-      <div class="p-4 bg-white rounded-xl shadow hover:scale-105 transition">
-        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" class="w-10 mx-auto mb-2" alt="Кофе">
-        <p>Кофе-брейк включён</p>
+      <div class="text-center">
+        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
+        <h3 class="font-semibold mb-2">Поддержка</h3>
+        <p class="text-gray-600">Закрытый чат Telegram для участников.</p>
       </div>
-      <div class="p-4 bg-white rounded-xl shadow hover:scale-105 transition">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" class="w-10 mx-auto mb-2" alt="ChatGPT">
-        <p>Доступ к <strong>ChatGPT PRO</strong></p>
+      <div class="text-center">
+        <svg class="mx-auto mb-4 w-10 h-10 text-purple-600"><use xlink:href="#icon-check"/></svg>
+        <h3 class="font-semibold mb-2">Гарантия</h3>
+        <p class="text-gray-600">Возврат в течение 7 дней при неудовлетворённости.</p>
       </div>
-      <div class="p-4 bg-white rounded-xl shadow hover:scale-105 transition">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-10 mx-auto mb-2" alt="Telegram">
-        <a href="https://t.me/shakhter_ai" target="_blank">AI-ассистент курса</a>
+    </div>
+  </section>
+
+  <!-- Program -->
+  <section id="program" class="bg-white py-16 px-6" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-center mb-10">Программа</h2>
+    <ul class="max-w-2xl mx-auto space-y-6">
+      <li class="flex items-start space-x-4">
+        <span class="text-purple-600 font-bold text-xl">1.</span>
+        <p>Введение в промт-инжиниринг и принципы работы нейросети.</p>
+      </li>
+      <li class="flex items-start space-x-4">
+        <span class="text-purple-600 font-bold text-xl">2.</span>
+        <p>Типы промтов: zero-shot, few-shot, chain-of-thought.</p>
+      </li>
+      <li class="flex items-start space-x-4">
+        <span class="text-purple-600 font-bold text-xl">3.</span>
+        <p>Практика: создание промтов для разных задач.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-16 px-6 bg-indigo-50" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-center mb-10">Отзывы участников</h2>
+    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <p class="italic mb-4">“Это был мой первый опыт работы с ChatGPT – и теперь я не представляю свою работу без него!”</p>
+        <p class="font-semibold text-purple-700">— Мария, дизайнер</p>
       </div>
-    </section>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <p class="italic mb-4">“Курс дал понятный и чёткий подход. Не вода, а практика!”</p>
+        <p class="font-semibold text-purple-700">— Алексей, маркетолог</p>
+      </div>
+    </div>
+  </section>
 
-    <section id="tariffs" class="fade-in-up">
-      <h2 class="text-2xl font-semibold text-center mb-4">Что? Где? Когда?</h2>
-      <table class="w-full border border-gray-200 shadow-md rounded-xl overflow-hidden">
-        <thead class="bg-purple-700 text-white">
-          <tr>
-            <th class="py-3 px-4">Вариант</th>
-            <th class="py-3 px-4">Описание</th>
-            <th class="py-3 px-4">Стоимость</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white hover:bg-gray-50">
-            <td class="py-3 px-4">Очное участие</td>
-            <td class="py-3 px-4">Мастер‑класс в аудитории</td>
-            <td class="py-3 px-4">2 500 ₽</td>
-          </tr>
-          <tr class="bg-white hover:bg-gray-50">
-            <td class="py-3 px-4">Онлайн-доступ</td>
-            <td class="py-3 px-4">Участие через интернет</td>
-            <td class="py-3 px-4">1 500 ₽</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+  <!-- Includes -->
+  <section id="includes" class="max-w-3xl mx-auto py-16 px-6" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-center mb-10">Что включено</h2>
+    <ul class="space-y-4">
+      <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500"><use xlink:href="#icon-check"/></svg>Доступ к записям на 14 дней</li>
+      <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500"><use xlink:href="#icon-check"/></svg>PDF-гайд по промт-инжинирингу</li>
+      <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500"><use xlink:href="#icon-check"/></svg>Чат поддержки в Telegram</li>
+    </ul>
+  </section>
 
-    <section id="payment" class="text-center fade-in-up">
-      <p>Оплата — картой, через СБП или QR-код.</p>
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="QR-код" class="w-24 mx-auto my-4">
-      <button onclick="window.location.href='https://www.tinkoff.ru/pay'" class="bg-yellow-400 text-black font-bold py-2 px-6 rounded-xl hover:bg-yellow-500 transition">Оплатить через Тинькофф</button>
-    </section>
-  </main>
+  <!-- Pricing -->
+  <section id="pricing" class="bg-white py-16 px-6 text-center" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold mb-6">Участие</h2>
+    <p class="text-4xl font-bold text-purple-700 mb-4">2 500 ₽ <span class="text-sm font-medium text-gray-500">до 25 апреля</span></p>
+    <p class="text-sm text-gray-600 mb-8">Осталось всего 7 мест</p>
+    <button id="payBtn" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition">Оплатить через карту</button>
+  </section>
 
-  <button onclick="window.location.href='#payment'" class="fixed bottom-6 right-6 bg-purple-700 text-white font-bold py-3 px-6 rounded-2xl glow shadow-lg hover:bg-purple-900 transition z-50">Записаться сейчас</button>
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-8 text-center text-sm text-gray-600">
+    © 2025 StepAI. Все права защищены.
+  </footer>
 
-  <!-- Popup Story -->
-  <div id="story-popup" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-xl overflow-hidden max-w-md w-full relative">
-      <video id="story-video" src="https://www.w3schools.com/html/mov_bbb.mp4" autoplay muted playsinline class="w-full"></video>
-      <button onclick="document.getElementById('story-popup').classList.add('hidden')" class="absolute top-2 right-2 bg-black text-white rounded-full w-8 h-8">×</button>
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 modal-bg hidden items-center justify-center">
+    <div class="bg-white rounded-2xl p-8 w-full max-w-md relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl">×</button>
+      <h3 class="text-xl font-semibold mb-4 text-center">Регистрация на мастер-класс</h3>
+      <form id="regForm" class="space-y-4">
+        <input name="name" type="text" placeholder="Ваше имя" required class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        <input name="email" type="email" placeholder="Email" required class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        <input name="tariff" type="hidden" value="promo" />
+        <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 transition">Оплатить</button>
+      </form>
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://js.stripe.com/v3/"></script>
   <script>
-    document.getElementById("avatar-story").addEventListener("click", function () {
-      const popup = document.getElementById("story-popup");
-      const video = document.getElementById("story-video");
-      popup.classList.remove("hidden");
-      video.currentTime = 0;
-      video.play();
+    AOS.init();
+    const stripe = Stripe('pk_test_YOUR_PUBLIC_KEY');
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+    function openModal() {
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+      document.getElementById('modal').classList.remove('flex');
+    }
+    document.querySelectorAll('#openModalBtn, #openModalBtn2').forEach(btn => btn.addEventListener('click', openModal));
+
+    document.getElementById('regForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = { name: form.name.value, email: form.email.value, tariff: form.tariff.value };
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const { sessionId } = await res.json();
+      await stripe.redirectToCheckout({ sessionId });
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("opacity-100");
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll("section").forEach(section => {
-      section.classList.add("opacity-0", "transition", "duration-1000");
-      observer.observe(section);
-    });
+    document.getElementById('payBtn').addEventListener('click', openModal);
   </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
-<script>
-// Тот же JavaScript-код, вставляемый в прошлом шаге для 3D-анимации текста
-let height, width, container, scene, camera, renderer, particles = [], mouseVector = new THREE.Vector3(0, 0, 0), mousePos = new THREE.Vector3(0, 0, 0), cameraLookAt = new THREE.Vector3(0, 0, 0), cameraTarget = new THREE.Vector3(0, 0 ,800), textCanvas, textCtx, textPixels = [], input;
-const colors = ['#F7A541', '#F45D4C', '#FA2E59', '#4783c3', '#9c6cb7'];
-function initStage() {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  container = document.getElementById('stage');
-  window.addEventListener('resize', resize);
-  container.addEventListener('mousemove', mousemove);
-}
-function initScene() {
-  scene = new THREE.Scene();
-  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(width, height);
-  container.appendChild(renderer.domElement);
-}
-function randomPos(vector) {
-  const radius = width * 3;
-  const r = width + radius * Math.random();
-  const angle = Math.random() * Math.PI * 2;
-  vector.x = r * Math.cos(angle);
-  vector.y = r * Math.sin(angle);
-}
-function initCamera() {
-  const fieldOfView = 75, aspectRatio = width / height, nearPlane = 1, farPlane = 3000;
-  camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-  camera.position.z = 800;
-}
-function createLights() {
-  const shadowLight = new THREE.DirectionalLight(0xffffff, 2);
-  shadowLight.position.set(20, 0, 10);
-  scene.add(shadowLight);
-  const light = new THREE.DirectionalLight(0xffffff, .5);
-  light.position.set(-20, 0, 20);
-  scene.add(light);
-  const backLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  backLight.position.set(0, 0, -20);
-  scene.add(backLight);
-}
-function Particle() {
-  this.vx = Math.random() * 0.05;
-  this.vy = Math.random() * 0.05;
-}
-Particle.prototype.init = function(i) {
-  const particle = new THREE.Object3D();
-  const geometryCore = new THREE.BoxGeometry(20, 20, 20);
-  const materialCore = new THREE.MeshLambertMaterial({ color: colors[i % colors.length] });
-  const box = new THREE.Mesh(geometryCore, materialCore);
-  particle.targetPosition = new THREE.Vector3((textPixels[i].x - (width / 2)) * 4, (textPixels[i].y) * 5, -10 * Math.random() + 20);
-  randomPos(particle.position);
-  box.geometry.vertices.forEach(v => {
-    v.x += -10 + Math.random() * 20;
-    v.y += -10 + Math.random() * 20;
-    v.z += -10 + Math.random() * 20;
-  });
-  particle.add(box);
-  this.particle = particle;
-};
-Particle.prototype.updateRotation = function() {
-  this.particle.rotation.x += this.vx;
-  this.particle.rotation.y += this.vy;
-};
-Particle.prototype.updatePosition = function() {
-  this.particle.position.lerp(this.particle.targetPosition, 0.02);
-};
-function render() { renderer.render(scene, camera); }
-function updateParticles() {
-  particles.forEach(p => { p.updateRotation(); p.updatePosition(); });
-}
-function setParticles() {
-  textPixels.forEach((_, i) => {
-    if (particles[i]) {
-      particles[i].particle.targetPosition.x = (textPixels[i].x - (width / 2)) * 4;
-      particles[i].particle.targetPosition.y = (textPixels[i].y) * 5;
-      particles[i].particle.targetPosition.z = -10 * Math.random() + 20;
-    } else {
-      const p = new Particle();
-      p.init(i);
-      scene.add(p.particle);
-      particles[i] = p;
-    }
-  });
-  for (let i = textPixels.length; i < particles.length; i++) {
-    randomPos(particles[i].particle.targetPosition);
-  }
-}
-function initCanvas() {
-  textCanvas = document.getElementById('text');
-  textCanvas.width = width;
-  textCanvas.height = 200;
-  textCtx = textCanvas.getContext('2d');
-  textCtx.font = '700 100px Arial';
-  textCtx.fillStyle = '#555';
-}
-function initInput() {
-  input = document.getElementById('input');
-  input.style.display = 'none';
-  input.value = '29 апреля 2025';
-  updateText();
-}
-function updateText() {
-  const fontSize = Math.min(120, width / (input.value.length * 1.3));
-  textCtx.font = '700 ' + fontSize + 'px Arial';
-  textCtx.clearRect(0, 0, width, 200);
-  textCtx.textAlign = 'center';
-  textCtx.textBaseline = 'middle';
-  textCtx.fillText(input.value.toUpperCase(), width / 2, 50);
-  const pix = textCtx.getImageData(0, 0, width, 200).data;
-  textPixels = [];
-  for (let i = pix.length; i >= 0; i -= 4) {
-    if (pix[i] !== 0) {
-      const x = (i / 4) % width;
-      const y = Math.floor(Math.floor(i / width) / 4);
-      if (x % 6 === 0 && y % 6 === 0) {
-        textPixels.push({ x, y: 200 - y - 120 });
-      }
-    }
-  }
-  setParticles();
-}
-function animate() {
-  requestAnimationFrame(animate);
-  updateParticles();
-  camera.position.lerp(cameraTarget, 0.2);
-  camera.lookAt(cameraLookAt);
-  render();
-}
-function resize() {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
-  textCanvas.width = width;
-  textCanvas.height = 200;
-  updateText();
-}
-function mousemove(e) {
-  const x = e.pageX - width / 2;
-  const y = e.pageY - height / 2;
-  cameraTarget.x = -x;
-  cameraTarget.y = y;
-}
-initStage();
-initScene();
-initCanvas();
-initCamera();
-createLights();
-initInput();
-animate();
-setTimeout(updateText, 40);
-</script>
 </body>
 </html>
