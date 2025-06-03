@@ -2,23 +2,16 @@ document.getElementById('reg-form').addEventListener('submit', async function(ev
   event.preventDefault();
   const form = event.target;
 
-  // Читаем и кодируем значения полей
-  const nameValue = encodeURIComponent(form.name.value.trim());
-  const contactValue = encodeURIComponent(form.contact.value.trim());
+  const name = encodeURIComponent(form.name.value.trim());
+  const contact = encodeURIComponent(form.contact.value.trim());
 
-  // Вот сюда вставляем ваш Web App URL:
-  const BASE_URL = 'https://script.google.com/macros/s/AKfycbyw7-aGgJ4Sj1tKBEWBqtEFLPs2BCRK04Xm2GTkFgVUAPK4lFs_ARucFwiK4iRFZTyj/exec';
-
-  // Составляем URL с GET-параметрами
-  const requestUrl = `${BASE_URL}?name=${nameValue}&contact=${contactValue}`;
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxpsZGc0PWP7MbSCVvqakKrRwtdLwuCDpP0yC_LhsHiCHc0IJUHtvYmckZObVQIh9AE/exec';
+  const requestURL = `${scriptURL}?name=${name}&contact=${contact}`;
 
   try {
-    // Делаем простой GET (будет без preflight, т. е. без CORS-ошибок)
-    const response = await fetch(requestUrl, {
-      method: 'GET'
-    });
-
+    const response = await fetch(requestURL, { method: 'GET' }); // ❗ именно GET
     const result = await response.json();
+
     if (result.status === 'success') {
       document.getElementById('status-message').textContent = result.message;
       form.name.value = '';
@@ -26,14 +19,8 @@ document.getElementById('reg-form').addEventListener('submit', async function(ev
     } else {
       document.getElementById('status-message').textContent = 'Ошибка: ' + result.message;
     }
-  } catch (err) {
-    document.getElementById('status-message').textContent = 'Ошибка при отправке: ' + err.message;
-    console.error(err);
+  } catch (error) {
+    document.getElementById('status-message').textContent = 'Ошибка соединения: ' + error.message;
+    console.error(error);
   }
-});
-
-// Анимации fade-in-up (если нужны)
-document.addEventListener('DOMContentLoaded', () => {
-  const fadeElements = document.querySelectorAll('.fade-in-up');
-  fadeElements.forEach(el => el.classList.add('visible'));
 });
