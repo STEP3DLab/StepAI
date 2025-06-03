@@ -6,7 +6,7 @@ document.getElementById('reg-form').addEventListener('submit', async function(ev
     name: form.name.value,
     contact: form.contact.value
   };
-  const response = await fetch('https://script.google.com/macros/s/AKfycbzsT4H2FURE-561MI1SR5j-NkqT4LEXzF6jgPzjN0eHvpXVTg_p0gu7gOxsqs6jFbMm/exec', {
+  const response = await fetch('https://script.google.com/macros/s/AKfycbxpsZGc0PWP7MbSCVvqakKrRwtdLwuCDpP0yC_LhsHiCHc0IJUHtvYmckZObVQIh9AE/exec', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
