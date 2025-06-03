@@ -5,11 +5,12 @@ document.getElementById('reg-form').addEventListener('submit', async function(ev
   const name = encodeURIComponent(form.name.value.trim());
   const contact = encodeURIComponent(form.contact.value.trim());
 
+  // Вставьте сюда ваш Web App URL (после Deploy в Google Apps Script)
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxpsZGc0PWP7MbSCVvqakKrRwtdLwuCDpP0yC_LhsHiCHc0IJUHtvYmckZObVQIh9AE/exec';
   const requestURL = `${scriptURL}?name=${name}&contact=${contact}`;
 
   try {
-    const response = await fetch(requestURL, { method: 'GET' }); // ❗ именно GET
+    const response = await fetch(requestURL, { method: 'GET' });
     const result = await response.json();
 
     if (result.status === 'success') {
