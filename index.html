@@ -33,15 +33,32 @@
       📚 При 24+ часах — свидетельство повышения квалификации РГСУ.
     </aside>
 
- <form id="reg-form">
-  <label for="name">Имя:</label>
-  <input type="text" id="name" name="name" required>
+<div id="signup-widget" style="
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  background: #f9f9f9;
+  font-family: sans-serif;
+">
+  <h2 style="text-align:center; margin-bottom: 16px;">Записаться на мастер-класс</h2>
 
-  <label for="contact">Контакт:</label>
-  <input type="text" id="contact" name="contact" required>
+  <form id="reg-form">
+    <label for="name">Имя:</label><br>
+    <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 12px;"><br>
 
-  <button type="submit">Записаться</button>
-</form>
+    <label for="contact">Контакт (email или телефон):</label><br>
+    <input type="text" id="contact" name="contact" required style="width: 100%; padding: 8px; margin-bottom: 16px;"><br>
+
+    <button type="submit" style="width: 100%; padding: 10px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">
+      Записаться
+    </button>
+  </form>
+
+  <p id="status-message" style="text-align: center; margin-top: 16px; color: #333;"></p>
+</div>
+
 
 <p id="status-message"></p>
 
