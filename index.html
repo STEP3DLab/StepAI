@@ -33,11 +33,18 @@
       📚 При 24+ часах — свидетельство повышения квалификации РГСУ.
     </aside>
 
-    <form id="reg-form" class="fade-in-up">
-      <input type="text" name="name" placeholder="Ваше имя" required />
-      <input type="text" name="contact" placeholder="E-mail, телефон или Telegram" required />
-      <button type="submit">Записаться</button>
-    </form>
+ <form id="reg-form">
+  <label for="name">Имя:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="contact">Контакт:</label>
+  <input type="text" id="contact" name="contact" required>
+
+  <button type="submit">Записаться</button>
+</form>
+
+<p id="status-message"></p>
+
     <div id="status-message" class="fade-in-up"></div>
     <p class="fade-in-up"><a href="https://pay.example.com/step3d" target="_blank" class="btn">💳 Оплатить участие</a></p>
 
