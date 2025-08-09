@@ -1,0 +1,4 @@
+- refactor: split CSS and JS into modular assets
+- feat: accessible menu, command palette commands, project modal with JSON, advanced estimator
+- feat: local analytics logger with export/clear
+- docs: add tests, sitemap, robots, GitHub Actions workflows

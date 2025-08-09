@@ -1,0 +1,5 @@
+@media print{
+  .nav,.cta,#progress,#fx3d,.marquee,#kbar{display:none!important}
+  section{padding:16px 0}
+  a[href^="http"]:after{content:" (" attr(href) ")";font-size:12px}
+}

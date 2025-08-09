@@ -1,0 +1,25 @@
+name: lint
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: HTML validator
+        uses: chabad360/htmlproofer@master
+        with:
+          directory: .
+      - name: stylelint
+        run: npx stylelint "**/*.css" || true
+      - name: Link checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --no-progress --accept 200,301,302 .
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: .

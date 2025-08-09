@@ -1,0 +1,14 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Tests</title><link rel="stylesheet" href="../assets/css/tokens.css"><link rel="stylesheet" href="../assets/css/base.css"><link rel="stylesheet" href="../assets/css/components.css"></head><body>
+<div id="out"></div>
+<script src="../assets/js/analytics.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="../assets/js/estimator.js"></script>
+<script src="../assets/js/fx3d.js"></script>
+<script src="../assets/js/kbar.js"></script>
+<script>
+console.assert(document.querySelectorAll('.nav a.link').length>=6,'nav links');
+console.assert(document.getElementById('kbarInput'),'kbar input');
+console.assert(document.getElementById('fx3d'),'fx3d');
+fetch('visual.json').then(r=>r.json()).then(v=>{for(const sel in v){const el=document.querySelector(sel);const cs=el?getComputedStyle(el):null;for(const prop in v[sel]){const val=cs?cs.getPropertyValue(prop):'';console.assert(val.trim()==v[sel][prop],sel+' '+prop);}}});
+</script>
+</body></html>

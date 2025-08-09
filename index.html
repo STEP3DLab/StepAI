@@ -4,11 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Step3D — Агрегатор 3D‑услуг</title>
-  <meta name="description" content="Step3D — крупнейший российский агрегатор услуг 3D‑моделирования, 3D‑печати, 3D‑сканирования, реверс‑инжиниринга и XR."/>
+  <meta name="description" content="Step3D — агрегатор услуг 3D‑моделирования, 3D‑печати и сканирования" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='white'/%3E%3Cpath d='M10 22l22-10 22 10-22 10-22-10zm0 0v20l22 10 22-10V22' stroke='black' fill='none'/%3E%3Ctext x='50%' y='56%' font-family='Inter,Arial' font-size='14' text-anchor='middle'%3EStep3D%3C/text%3E%3C/svg%3E">
-    <link rel="stylesheet" href="style.css">
+  <meta property="og:title" content="Step3D" />
+  <meta property="og:description" content="Агрегатор 3D‑услуг" />
+  <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='white'/><path d='M10 22l22-10 22 10-22 10-22-10zm0 0v20l22 10 22-10V22' stroke='black' fill='none'/></svg>" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+  <link rel="preload" href="assets/css/tokens.css" as="style" />
+  <link rel="preload" href="assets/css/base.css" as="style" />
+  <link rel="preload" href="assets/css/components.css" as="style" />
+  <link rel="preload" href="assets/js/ui.js" as="script" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/print.css" media="print" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Step3D","url":"https://step3dlab.github.io/StepAI/","logo":"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='white'/><path d='M10 22l22-10 22 10-22 10-22-10zm0 0v20l22 10 22-10V22' stroke='black' fill='none'/></svg>","sameAs":["https://t.me/STEP_3D_Lab"]}</script>
 </head>
 <body class="bg-grid">
   <a class="skip" href="#main">Пропустить к контенту</a>
@@ -34,140 +46,90 @@
   </header>
 
   <main id="main">
-    <!-- HERO -->
     <section class="hero wrap reveal in">
       <canvas id="fx3d" class="fx3d" aria-hidden="true"></canvas>
       <div style="width:100%">
         <h1>Ваш проводник в мир 3D‑технологий</h1>
-        <p class="muted">Агрегатор 3D‑услуг: моделирование, сканирование, реверс‑инжиниринг, 3D‑печать и XR. AI‑модуль оценивает трудоёмкость и подбирает оптимального исполнителя.</p>
+        <p class="muted">Агрегатор 3D‑услуг: моделирование, сканирование, реверс‑инжиниринг, 3D‑печать и XR.</p>
         <div style="margin-top:var(--space-6);display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap">
           <a class="btn btn--primary" href="#contact">Оставить заявку</a>
           <a class="btn" id="tgCover" download="Step3D_TG_Cover.svg">Заставка TG</a>
           <button class="btn" id="share">Поделиться</button>
         </div>
-        <div class="marquee" aria-hidden="true">
-          <div class="row">#мечтай  #учись  #твори  #вдохновляй  #мечтай  #учись  #твори  #вдохновляй</div>
-        </div>
+        <div class="marquee" aria-hidden="true"><div class="row">#мечтай  #учись  #твори  #вдохновляй  #мечтай  #учись  #твори  #вдохновляй</div></div>
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="wrap reveal">
-      <div class="grid grid-2" style="align-items:start">
-        <div>
-          <h2 style="font-size:clamp(22px,3vw,28px)">Step3D — сообщество, платформа, экспертиза</h2>
-          <p class="muted" style="margin-top:10px">Мы автоматизируем путь от идеи до прототипа: интеллектуальная оценка заказа, подбор исполнителя, контроль качества. Меньше бюрократии, больше результата.</p>
-          <ul class="soft" style="margin-top:12px;padding-left:18px">
-            <li>КП за 1–2 минуты, прозрачные сроки и цена.</li>
-            <li>Инженеры, дизайнеры и чемпионы профмастерства в одной сети.</li>
-            <li>Web‑портал и Telegram‑бот в роли «единого окна».</li>
-          </ul>
-        </div>
-        <div class="card pad">
-          <h3 style="margin:0 0 var(--space-4) 0">Факты и направления</h3>
-          <div class="grid grid-3">
-            <div class="card pad" style="padding:var(--space-4)"><div class="fact"><svg class="ico ico-cad" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg><div><div class="soft" style="font-size:12px">3D‑моделирование</div><div>CAD/CAE</div></div></div></div>
-            <div class="card pad" style="padding:var(--space-4)"><div class="fact"><svg class="ico ico-scan" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg><div><div class="soft" style="font-size:12px">3D‑сканирование</div><div>оптика/лазер</div></div></div></div>
-            <div class="card pad" style="padding:var(--space-4)"><div class="fact"><svg class="ico ico-print" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v6H6z"/><path d="M12 10v6m0 0l3 3m-3-3l-3 3"/></svg><div><div class="soft" style="font-size:12px">3D‑печать</div><div>FDM/DLP/SLA</div></div></div></div>
-            <div class="card pad" style="padding:var(--space-4)"><div class="fact"><svg class="ico ico-xr" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="3"/><path d="M8 12h2m4 0h2"/></svg><div><div class="soft" style="font-size:12px">XR</div><div>VR/AR/MR</div></div></div></div>
-            <div class="card pad" style="padding:var(--space-4)"><div class="fact"><svg class="ico ico-rev" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l-4 4 4 4"/><path d="M17 7l4 4-4 4"/></svg><div><div class="soft" style="font-size:12px">Реверс</div><div>CAD по скану</div></div></div></div>
-            <div class="card pad" style="padding:var(--space-4)"><div class="fact"><svg class="ico ico-edu" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h14a4 4 0 014 4v8H7a4 4 0 01-4-4z"/><path d="M7 6v12"/></svg><div><div class="soft" style="font-size:12px">ДПО</div><div>48+ ч</div></div></div></div>
-          </div>
-        </div>
-      </div>
+      <h2 style="font-size:clamp(22px,3vw,28px)">Step3D — сообщество, платформа, экспертиза</h2>
+      <p class="muted">Мы автоматизируем путь от идеи до прототипа: интеллектуальная оценка заказа, подбор исполнителя, контроль качества.</p>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="wrap reveal">
-      <div style="display:flex;align-items:end;justify-content:space-between;gap:var(--space-3)">
-        <h2 style="font-size:clamp(22px,3vw,28px)">Услуги</h2>
-        <span class="soft" style="font-size:12px">Цены ориентировочные, «от»</span>
-      </div>
+      <h2 style="font-size:clamp(22px,3vw,28px)">Услуги</h2>
       <div class="grid grid-3" style="margin-top:var(--space-6)">
         <div class="card service">
           <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-cad" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>3D‑моделирование (CAD)</h3>
-          <div class="soft">Инженерное и художественное</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 1 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
+          <div class="soft">Инженерное и художественное</div><div class="sep"></div><div style="display:flex;align-items:center;justify-content:space-between"><span>от 1 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
         </div>
         <div class="card service">
           <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-scan" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>3D‑сканирование</h3>
-          <div class="soft">Оптическое и лазерное</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 2 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
+          <div class="soft">Оптическое и лазерное</div><div class="sep"></div><div style="display:flex;align-items:center;justify-content:space-between"><span>от 2 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
         </div>
         <div class="card service">
-          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-print" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v6H6z"/><path d="M12 10v6m0 0l3 3m-3-3l-3 3"/></svg>3D‑печать (FDM, DLP)</h3>
-          <div class="soft">Прототипы и мелкосерийка</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 500 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
-        </div>
-        <div class="card service">
-          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-rev" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l-4 4 4 4"/><path d="M17 7l4 4-4 4"/></svg>Реверс‑инжиниринг</h3>
-          <div class="soft">CAD по сканам, отклонения</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 5 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
-        </div>
-        <div class="card service">
-          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-design" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16C8 9 16 9 20 16"/><circle cx="12" cy="12" r="1"/></svg>Промышленный дизайн</h3>
-          <div class="soft">Дизайн + прототип</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 50 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
-        </div>
-        <div class="card service">
-          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-motion" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5z"/><path d="M10 9l5 3-5 3z"/></svg>Моушен‑дизайн</h3>
-          <div class="soft">CG‑ролики, визуализации</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 10 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
-        </div>
-        <div class="card service">
-          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-vr" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="3"/><path d="M8 12h2m4 0h2"/></svg>VR/AR/MR</h3>
-          <div class="soft">Интерактив и демо‑стенды</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 50 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
-        </div>
-        <div class="card service">
-          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-edu" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h14a4 4 0 014 4v8H7a4 4 0 01-4-4z"/><path d="M7 6v12"/></svg>Курсы ДПО (РГСУ)</h3>
-          <div class="soft">48+ академ. часов</div>
-          <div class="sep"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><span>от 68 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
+          <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-print" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v6H6z"/><path d="M12 10v6m0 0l3 3m-3-3l-3 3"/></svg>3D‑печать (FDM, SLA)</h3>
+          <div class="soft">Пластики и фотополимеры</div><div class="sep"></div><div style="display:flex;align-items:center;justify-content:space-between"><span>от 5 000 ₽</span><a href="#contact" class="btn">Заказать ▸</a></div>
         </div>
       </div>
     </section>
 
-    <!-- ESTIMATOR -->
     <section id="estimator" class="wrap reveal est">
-      <h2 style="font-size:clamp(22px,3vw,28px)">Быстрый расчёт 3D‑печати</h2>
-      <p class="muted">Приблизительная оценка по объёму модели и технологии. Итог подтвердим после слайсера.</p>
-      <div class="card pad" style="margin-top:14px">
+      <h2 style="font-size:clamp(22px,3vw,28px)">Калькулятор</h2>
+      <div class="card pad" style="margin-top:var(--space-6)">
         <div class="row">
           <div>
             <div class="soft" style="font-size:12px">Технология</div>
-            <div style="display:flex;gap:var(--space-2);margin-top:8px">
+            <div style="display:flex;gap:8px;margin-top:6px">
               <button class="chip active" data-tech="FDM">FDM</button>
               <button class="chip" data-tech="SLA">SLA</button>
               <button class="chip" data-tech="SLS">SLS</button>
             </div>
           </div>
           <div>
-            <div class="soft" style="font-size:12px">Объём модели (см³)</div>
+            <label class="soft" style="font-size:12px" for="material">Материал</label>
+            <select id="material" style="width:100%;margin-top:6px">
+              <option>PLA</option>
+              <option>ABS</option>
+              <option>PETG</option>
+              <option>Resin</option>
+            </select>
+          </div>
+          <div>
+            <label class="soft" style="font-size:12px" for="layer">Слой (мм)</label>
+            <select id="layer" style="width:100%;margin-top:6px">
+              <option value="0.1">0.1</option>
+              <option value="0.2" selected>0.2</option>
+              <option value="0.3">0.3</option>
+            </select>
+          </div>
+          <div>
+            <label class="soft" style="font-size:12px" for="infill">Заполнение (%)</label>
+            <input id="infill" type="range" min="0" max="100" value="20" class="range" />
+            <div class="soft" style="margin-top:6px">Текущее значение: <span id="infillv">20</span>%</div>
+          </div>
+          <div>
+            <label class="soft" style="font-size:12px" for="vol">Объём (см³)</label>
             <input id="vol" type="range" min="1" max="500" value="50" class="range" />
             <div class="soft" style="margin-top:6px">Текущее значение: <span id="volv">50</span> см³</div>
           </div>
         </div>
         <div class="summary">
           <label class="soft" style="display:flex;align-items:center;gap:var(--space-2)"><input id="rush" type="checkbox"/> Срочно (≈ +30%)</label>
-          <div style="text-align:right">
-            <div class="soft" style="font-size:12px">Оценка</div>
-            <div id="price" style="font-size:28px;font-weight:600">≈ 400 ₽</div>
-          </div>
+          <div style="text-align:right"><div class="soft" style="font-size:12px">Оценка</div><div id="price" style="font-size:28px;font-weight:600">≈ 400 ₽</div></div>
         </div>
       </div>
-      <div class="soft" style="font-size:12px;margin-top:8px">* Средние тарифы по технологиям. Постобработка и срочность считаются отдельно.</div>
-      <div style="margin-top:14px;display:flex;gap:var(--space-2)"><a class="btn btn--primary" href="#contact">Получить точное КП</a><button class="btn" id="print">Печать КП</button></div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects" class="wrap reveal">
       <div style="display:flex;gap:var(--space-3);align-items:end;justify-content:space-between;flex-wrap:wrap">
         <h2 style="font-size:clamp(22px,3vw,28px)">Проекты</h2>
@@ -180,16 +142,12 @@
           <button class="tag" data-tag="Реверс">Реверс</button>
           <button class="tag" data-tag="VR/AR">VR/AR</button>
           <button class="tag" data-tag="Дизайн">Дизайн</button>
-          <div class="search">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <input id="q" placeholder="Поиск по проектам"/>
-          </div>
+          <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="q" placeholder="Поиск по проектам"/></div>
         </div>
       </div>
       <div id="proj" class="grid grid-3" style="margin-top:var(--space-6)"></div>
     </section>
 
-    <!-- BLOG -->
     <section id="blog" class="wrap reveal">
       <div style="display:flex;align-items:end;justify-content:space-between;gap:var(--space-3)">
         <h2 style="font-size:clamp(22px,3vw,28px)">Блог</h2>
@@ -198,21 +156,14 @@
       <div id="bloglist" class="grid grid-3" style="margin-top:var(--space-6)"></div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="wrap reveal">
       <div class="grid grid-2">
         <div>
           <h2 style="font-size:clamp(22px,3vw,28px)">Начнём проект</h2>
           <p class="muted">Опишите задачу — пришлём КП и сроки.</p>
           <div style="margin-top:12px;display:grid;gap:var(--space-2);font-size:14px">
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <a href="tel:+79959009141">📞 +7 (995) 900‑91‑41</a>
-              <button class="copy" data-copy="+7 (995) 900-91-41" type="button">Копировать</button>
-            </div>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <a href="mailto:info@step3d.tech">✉️ info@step3d.tech</a>
-              <button class="copy" data-copy="info@step3d.tech" type="button">Копировать</button>
-            </div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a href="tel:+79959009141">📞 +7 (995) 900‑91‑41</a><button class="copy" data-copy="+7 (995) 900-91-41" type="button">Копировать</button></div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a href="mailto:info@step3d.tech">✉️ info@step3d.tech</a><button class="copy" data-copy="info@step3d.tech" type="button">Копировать</button></div>
             <a href="https://t.me/STEP_3D_Lab" target="_blank" rel="noopener noreferrer">💬 t.me/STEP_3D_Lab</a>
           </div>
         </div>
@@ -232,28 +183,13 @@
     </section>
   </main>
 
-  <!-- Mobile CTA + Modal -->
   <div id="cta" class="cta" hidden>
     <a class="btn btn--primary" href="#estimator">Калькулятор</a>
     <a class="btn" href="#contact">Заявка</a>
     <button class="btn" id="ctaSearch">Поиск</button>
   </div>
-  <div id="modal" class="modal" hidden role="dialog" aria-modal="true">
-    <div class="modal__inner card pad">
-      <button class="modal__close" aria-label="Закрыть">✕</button>
-      <div id="modalBody"></div>
-    </div>
-  </div>
-  <!-- Command palette -->
-  <div id="kbar" class="kbar" hidden>
-    <div class="kbar__box">
-      <div class="kbar__head">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <input id="kbarInput" class="kbar__input" placeholder="Поиск по сайту (⌘K)"/>
-      </div>
-      <div id="kbarList" class="kbar__list"></div>
-    </div>
-  </div>
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true"><div class="modal__inner card pad"><button class="modal__close" aria-label="Закрыть">✕</button><div id="modalBody"></div></div></div>
+  <div id="kbar" class="kbar" hidden><div class="kbar__box"><div class="kbar__head"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="kbarInput" class="kbar__input" placeholder="Поиск по сайту (⌘K)"/></div><div id="kbarList" class="kbar__list"></div></div></div>
 
   <footer>
     <div class="wrap" style="display:flex;gap:24px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap">
@@ -261,10 +197,22 @@
         <div class="brand" style="color:var(--fg)">Step3D</div>
         <p style="max-width:560px;margin:var(--space-2) 0 0 0">© <span id="y"></span> ООО «СТЕП_3Д». Все права защищены.</p>
       </div>
-      <div style="font-size:14px"><div class="soft" style="font-size:12px">ИНН 9725161467 · ОГРН 1247700430449</div></div>
+      <div style="font-size:14px"><div class="soft" style="font-size:12px">ИНН 9725161467 · ОГРН 1247700430449</div><div style="margin-top:8px;display:flex;gap:8px"><button id="exportLogs" class="btn">Экспорт логов</button><button id="clearLogs" class="btn">Очистить логи</button></div></div>
     </div>
   </footer>
 
-    <script src="script.js"></script>
+  <link rel="preload" href="assets/js/analytics.js" as="script" />
+  <link rel="preload" href="assets/js/estimator.js" as="script" />
+  <link rel="preload" href="assets/js/fx3d.js" as="script" />
+  <link rel="preload" href="assets/js/kbar.js" as="script" />
+  <script defer src="assets/js/analytics.js"></script>
+  <script defer src="assets/js/ui.js"></script>
+  <script defer src="assets/js/estimator.js"></script>
+  <script defer src="assets/js/fx3d.js"></script>
+  <script defer src="assets/js/kbar.js"></script>
+  <script>
+    document.getElementById('exportLogs')?.addEventListener('click',()=>logger.exportLogs());
+    document.getElementById('clearLogs')?.addEventListener('click',()=>logger.clearLogs());
+  </script>
 </body>
 </html>
