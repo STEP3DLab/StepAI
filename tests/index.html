@@ -53,11 +53,14 @@
   <div id="kbar"><div class="kbar__head"><input id="kbarInput" /></div></div>
   <div id="out"></div>
 
+  <section id="blog"><div id="bloglist"></div><div id="article" hidden></div></section>
+
   <script src="../assets/js/analytics.js"></script>
   <script src="../assets/js/ui.js"></script>
   <script src="../assets/js/estimator.js"></script>
   <script src="../assets/js/fx3d.js"></script>
   <script src="../assets/js/kbar.js"></script>
+  <script src="../assets/js/blog.js"></script>
   <script>
     console.assert(document.querySelectorAll('.nav a.link').length>=6,'nav links');
     console.assert(document.getElementById('kbarInput'),'kbar input');
@@ -76,9 +79,28 @@
       const prices = svc.map(c=> c.textContent);
       console.assert(/от\s?2\s?000\s?₽/i.test(prices[0]), 'Price mismatch for 3D-сканирование');
       console.assert(/от\s?500\s?₽/i.test(prices[1]), 'Price mismatch for 3D-печать');
-      console.assert(/от\s?5\s?000\s?₽/i.test(prices[2]), 'Price mismatch for Реверс-инжиниринг');
-      console.log('%cServices OK','color:green');
-    }catch(e){ console.warn('Services tests failed:', e); }
+    console.assert(/от\s?5\s?000\s?₽/i.test(prices[2]), 'Price mismatch for Реверс-инжиниринг');
+    console.log('%cServices OK','color:green');
+  }catch(e){ console.warn('Services tests failed:', e); }
+
+    // blog reader self-tests
+    try{
+      console.assert(Array.isArray(window.__BLOG__POSTS) && window.__BLOG__POSTS.length >= 1, 'Blog: no posts loaded');
+      const firstCard = document.querySelector('#bloglist .post');
+      if(firstCard){
+        firstCard.querySelector('.btn')?.click();
+        const article = document.querySelector('#article');
+        console.assert(article && !article.hidden, 'Reader should be visible');
+        console.assert(article.querySelector('h1'), 'Reader: missing H1');
+        const tocItems = article.querySelectorAll('.toc ol li');
+        console.assert(tocItems.length >= 1, 'Reader: TOC should have items');
+        const rt = article.querySelector('.readtime')?.textContent || '';
+        console.assert(/мин/.test(rt), 'Reader: reading time missing');
+        document.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+        console.assert(article.hidden === true, 'Reader: Esc should close');
+      }
+      console.log('%cBlog Reader OK','color:green');
+    }catch(e){ console.warn('Blog Reader tests failed:', e); }
   </script>
 </body>
 </html>

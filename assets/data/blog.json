@@ -1,5 +1,30 @@
 [
-  {"id":"cp-fast","title":"Как мы сокращаем путь к КП до 1–2 минут","date":"2024-07-19","excerpt":"AI‑модуль Step3D_system автоматически оценивает трудоёмкость, подбирает исполнителей и формирует прозрачное КП. Рассказываем архитектуру и гайдлайны."},
-  {"id":"fdm-vs-sla","title":"FDM vs SLA: когда и что выбирать","date":"2024-08-05","excerpt":"Сравниваем стоимость на см³, качество поверхности и сроки. Пару практических правил, чтобы не переплачивать."},
-  {"id":"reverse-practice","title":"Реверс‑инжиниринг: от скана до CAD","date":"2024-08-12","excerpt":"Пайплайн: скан → очистка → совмещение → NURBS/CAD → отклонения → выпуск КД. Советы по точности и материалам."}
+  {
+    "slug": "cp-fast",
+    "title": "Как мы сокращаем путь к КП до 1–2 минут",
+    "date": "2024-07-19",
+    "author": "Step3D",
+    "tags": ["AI", "Платформа"],
+    "hero": {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzUwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nNTAnIGZpbGw9J2xnaHQnIC8+PHRleHQgeD0nNTAnIHk9JzI1JyBmb250LXNpemU9JzE4JyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBkeT0nLjMuNzUnPkhlcm88L3RleHQ+PC9zdmc+",
+      "alt": "Схема Step3D",
+      "caption": "Схема модуля оценки"
+    },
+    "excerpt": "AI‑модуль Step3D_system автоматически оценивает трудоёмкость...",
+    "contentHtml": "<p>Вступление.</p><h2>Почему так быстро</h2><p>Секрет — в алгоритмах.</p><h3>Алгоритм</h3><p>Подробнее.</p><ul><li>Шаг 1</li><li>Шаг 2</li></ul>"
+  },
+  {
+    "slug": "fdm-vs-sla",
+    "title": "FDM vs SLA: когда и что выбирать",
+    "date": "2024-08-05",
+    "author": "Step3D",
+    "tags": ["Печать"],
+    "hero": {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzUwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nNTAnIGZpbGw9J2RnJyAvPjwvc3ZnPg==",
+      "alt": "FDM и SLA",
+      "caption": ""
+    },
+    "excerpt": "Сравниваем стоимость на см³, качество поверхности и сроки.",
+    "contentHtml": "<p>Текст.</p><h2>Стоимость</h2><p>Разница значительна.</p><h2>Качество</h2><p>Сравнение.</p>"
+  }
 ]
