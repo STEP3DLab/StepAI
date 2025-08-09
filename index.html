@@ -15,10 +15,12 @@
   <link rel="preload" href="assets/css/tokens.css" as="style" />
   <link rel="preload" href="assets/css/base.css" as="style" />
   <link rel="preload" href="assets/css/components.css" as="style" />
+  <link rel="preload" as="style" href="/StepAI/assets/css/article.css" />
   <link rel="preload" href="assets/js/ui.js" as="script" />
   <link rel="stylesheet" href="assets/css/tokens.css" />
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="/StepAI/assets/css/article.css" />
   <link rel="stylesheet" href="assets/css/print.css" media="print" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Step3D","url":"https://step3dlab.github.io/StepAI/","logo":"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='white'/><path d='M10 22l22-10 22 10-22 10-22-10zm0 0v20l22 10 22-10V22' stroke='black' fill='none'/></svg>","sameAs":["https://t.me/STEP_3D_Lab"]}</script>
 </head>
@@ -219,6 +221,7 @@
         <div class="search"><input id="bq" placeholder="Поиск по блогу"/></div>
       </div>
       <div id="bloglist" class="grid grid-3" style="margin-top:var(--space-6)"></div>
+      <div id="article" hidden></div>
     </section>
 
     <section id="contact" class="wrap reveal">
@@ -275,6 +278,7 @@
   <script defer src="assets/js/estimator.js"></script>
   <script defer src="assets/js/fx3d.js"></script>
   <script defer src="assets/js/kbar.js"></script>
+  <script defer src="/StepAI/assets/js/blog.js"></script>
   <script>
     document.getElementById('exportLogs')?.addEventListener('click',()=>logger.exportLogs());
     document.getElementById('clearLogs')?.addEventListener('click',()=>logger.clearLogs());
