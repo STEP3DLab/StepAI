@@ -88,48 +88,109 @@
     </section>
 
     <section id="estimator" class="wrap reveal est">
-      <h2 style="font-size:clamp(22px,3vw,28px)">Калькулятор</h2>
+      <h2 style="font-size:clamp(22px,3vw,28px)">Быстрый расчёт 3D‑печати</h2>
       <div class="card pad" style="margin-top:var(--space-6)">
-        <div class="row">
+        <div>
+          <div class="soft" style="font-size:12px">Режим ввода</div>
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <button class="chip mode active" data-mode="volume">объём</button>
+            <button class="chip mode" data-mode="dims">габариты</button>
+            <button class="chip mode" data-mode="weight">вес</button>
+          </div>
+        </div>
+        <div id="mode-volume" class="mode-block" style="margin-top:var(--space-3)">
+          <label class="soft" for="volume">Объём (см³)</label>
+          <input id="volume" type="number" min="0" step="0.1" value="50" />
+        </div>
+        <div id="mode-dims" class="mode-block" hidden style="margin-top:var(--space-3)">
+          <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(80px,1fr))">
+            <div><label class="soft" for="dimx">X (мм)</label><input id="dimx" type="number" min="1" value="50" /></div>
+            <div><label class="soft" for="dimy">Y (мм)</label><input id="dimy" type="number" min="1" value="50" /></div>
+            <div><label class="soft" for="dimz">Z (мм)</label><input id="dimz" type="number" min="1" value="50" /></div>
+          </div>
+          <div style="margin-top:var(--space-3)">
+            <label class="soft" for="form">Форма</label>
+            <select id="form" style="width:100%;margin-top:6px">
+              <option value="solid">Сплошной</option>
+              <option value="hollow">Полый</option>
+            </select>
+          </div>
+        </div>
+        <div id="mode-weight" class="mode-block" hidden style="margin-top:var(--space-3)">
+          <label class="soft" for="weight">Вес (г)</label>
+          <input id="weight" type="number" min="0" step="0.1" value="60" />
+        </div>
+
+        <div style="display:grid;gap:16px;margin-top:var(--space-6);grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">
           <div>
             <div class="soft" style="font-size:12px">Технология</div>
             <div style="display:flex;gap:8px;margin-top:6px">
-              <button class="chip active" data-tech="FDM">FDM</button>
-              <button class="chip" data-tech="SLA">SLA</button>
-              <button class="chip" data-tech="SLS">SLS</button>
+              <button class="chip tech active" data-tech="FDM">FDM</button>
+              <button class="chip tech" data-tech="SLA">SLA</button>
+              <button class="chip tech" data-tech="SLS">SLS</button>
             </div>
           </div>
           <div>
             <label class="soft" style="font-size:12px" for="material">Материал</label>
-            <select id="material" style="width:100%;margin-top:6px">
-              <option>PLA</option>
-              <option>ABS</option>
-              <option>PETG</option>
-              <option>Resin</option>
-            </select>
+            <select id="material" style="width:100%;margin-top:6px"></select>
           </div>
           <div>
             <label class="soft" style="font-size:12px" for="layer">Слой (мм)</label>
-            <select id="layer" style="width:100%;margin-top:6px">
-              <option value="0.1">0.1</option>
-              <option value="0.2" selected>0.2</option>
-              <option value="0.3">0.3</option>
-            </select>
+            <select id="layer" style="width:100%;margin-top:6px"></select>
+          </div>
+          <div>
+            <label class="soft" style="font-size:12px" for="shell">Толщина стенки (мм)</label>
+            <input id="shell" type="number" min="0.4" step="0.1" value="1" />
           </div>
           <div>
             <label class="soft" style="font-size:12px" for="infill">Заполнение (%)</label>
-            <input id="infill" type="range" min="0" max="100" value="20" class="range" />
-            <div class="soft" style="margin-top:6px">Текущее значение: <span id="infillv">20</span>%</div>
+            <input id="infill" type="number" min="0" max="100" step="1" value="20" />
           </div>
           <div>
-            <label class="soft" style="font-size:12px" for="vol">Объём (см³)</label>
-            <input id="vol" type="range" min="1" max="500" value="50" class="range" />
-            <div class="soft" style="margin-top:6px">Текущее значение: <span id="volv">50</span> см³</div>
+            <label class="soft" style="font-size:12px" for="support">Поддержки</label>
+            <select id="support" style="width:100%;margin-top:6px">
+              <option value="none">Нет</option>
+              <option value="light">Лёгкие</option>
+              <option value="normal">Норм</option>
+              <option value="heavy">Тяжёлые</option>
+            </select>
+          </div>
+          <div>
+            <label class="soft" style="font-size:12px" for="post">Постобработка</label>
+            <select id="post" style="width:100%;margin-top:6px">
+              <option value="none">Нет</option>
+              <option value="sand">Шлифовка</option>
+              <option value="paint">Грунт+Покраска</option>
+            </select>
+          </div>
+          <div>
+            <label class="soft" style="font-size:12px" for="qty">Кол-во изделий</label>
+            <input id="qty" type="number" min="1" value="1" />
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:flex-end">
+            <label class="soft" style="font-size:12px"><input id="rush" type="checkbox"/> Срочно</label>
           </div>
         </div>
-        <div class="summary">
-          <label class="soft" style="display:flex;align-items:center;gap:var(--space-2)"><input id="rush" type="checkbox"/> Срочно (≈ +30%)</label>
-          <div style="text-align:right"><div class="soft" style="font-size:12px">Оценка</div><div id="price" style="font-size:28px;font-weight:600">≈ 400 ₽</div></div>
+
+        <div style="margin-top:var(--space-6)">
+          <div class="soft" style="font-size:12px">Итого сейчас</div>
+          <div id="output" class="summary" style="flex-direction:column;align-items:flex-start;text-align:left;gap:4px">
+            <div>Цена за 1 шт: <span id="price1">—</span></div>
+            <div>Цена всего: <span id="pricetotal">—</span></div>
+            <div>Срок: <span id="time">—</span></div>
+          </div>
+        </div>
+
+        <details style="margin-top:var(--space-3)">
+          <summary>Разбор стоимости</summary>
+          <ul id="breakdown" class="soft" style="font-size:14px;list-style:none;padding:0;margin:var(--space-3) 0 0 0;"></ul>
+        </details>
+
+        <p class="soft" style="font-size:12px;margin-top:var(--space-3)">Расчёт ориентировочный; точное КП — после слайсинга и проверки геометрии.</p>
+
+        <div style="display:flex;gap:var(--space-3);margin-top:var(--space-3);flex-wrap:wrap">
+          <a class="btn btn--primary" href="#contact">Получить точное КП</a>
+          <button id="print" class="btn" type="button">Печать КП</button>
         </div>
       </div>
     </section>
