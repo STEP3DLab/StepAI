@@ -1,14 +1,85 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Tests</title><link rel="stylesheet" href="../assets/css/tokens.css"><link rel="stylesheet" href="../assets/css/base.css"><link rel="stylesheet" href="../assets/css/components.css"></head><body>
-<div id="out"></div>
-<script src="../assets/js/analytics.js"></script>
-<script src="../assets/js/ui.js"></script>
-<script src="../assets/js/estimator.js"></script>
-<script src="../assets/js/fx3d.js"></script>
-<script src="../assets/js/kbar.js"></script>
-<script>
-console.assert(document.querySelectorAll('.nav a.link').length>=6,'nav links');
-console.assert(document.getElementById('kbarInput'),'kbar input');
-console.assert(document.getElementById('fx3d'),'fx3d');
-fetch('visual.json').then(r=>r.json()).then(v=>{for(const sel in v){const el=document.querySelector(sel);const cs=el?getComputedStyle(el):null;for(const prop in v[sel]){const val=cs?cs.getPropertyValue(prop):'';console.assert(val.trim()==v[sel][prop],sel+' '+prop);}}});
-</script>
-</body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Tests</title>
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+</head>
+<body>
+  <header class="nav">
+    <nav class="links">
+      <a class="link" href="#">1</a>
+      <a class="link" href="#">2</a>
+      <a class="link" href="#">3</a>
+      <a class="link" href="#">4</a>
+      <a class="link" href="#">5</a>
+      <a class="link" href="#">6</a>
+    </nav>
+  </header>
+
+  <canvas id="fx3d"></canvas>
+
+  <section id="services" class="wrap">
+    <div class="grid grid-3" style="margin-top:var(--space-6)">
+      <div class="card service">
+        <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-scan" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>3D-сканирование</h3>
+        <div class="soft">Оптическое и лазерное</div>
+        <div class="sep"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span>от 2 000 ₽</span><a href="#contact" class="btn" aria-label="Заказать: 3D-сканирование">Заказать ▸</a></div>
+      </div>
+      <div class="card service">
+        <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-print" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v6H6z"/><path d="M12 10v6m0 0l3 3m-3-3l-3 3"/></svg>3D-печать (FDM, DLP)</h3>
+        <div class="soft">Прототипы и мелкосерийка</div>
+        <div class="sep"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span>от 500 ₽</span><a href="#contact" class="btn" aria-label="Заказать: 3D-печать">Заказать ▸</a></div>
+      </div>
+      <div class="card service">
+        <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico svc-rev" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>Реверс-инжиниринг</h3>
+        <div class="soft">CAD по сканам, отклонения</div>
+        <div class="sep"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span>от 5 000 ₽</span><a href="#contact" class="btn" aria-label="Заказать: Реверс-инжиниринг">Заказать ▸</a></div>
+      </div>
+      <div class="card service">
+        <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>__FOURTH_SERVICE__</h3>
+        <div class="soft">__FOURTH_SUBTITLE__</div>
+        <div class="sep"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span>__FOURTH_PRICE__</span><a href="#contact" class="btn" aria-label="Заказать: __FOURTH_SERVICE__">Заказать ▸</a></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="kbar"><div class="kbar__head"><input id="kbarInput" /></div></div>
+  <div id="out"></div>
+
+  <script src="../assets/js/analytics.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/estimator.js"></script>
+  <script src="../assets/js/fx3d.js"></script>
+  <script src="../assets/js/kbar.js"></script>
+  <script>
+    console.assert(document.querySelectorAll('.nav a.link').length>=6,'nav links');
+    console.assert(document.getElementById('kbarInput'),'kbar input');
+    console.assert(document.getElementById('fx3d'),'fx3d');
+    if(typeof fetch==='function'){fetch('visual.json').then(r=>r.json()).then(v=>{for(const sel in v){const el=document.querySelector(sel);const cs=el?getComputedStyle(el):null;for(const prop in v[sel]){const val=cs?cs.getPropertyValue(prop):'';console.assert(val.trim()==v[sel][prop],sel+' '+prop);}}});}
+
+    // self-tests: services
+    try{
+      const svc = [...document.querySelectorAll('#services .service')];
+      console.assert(svc.length === 4, 'Services: expected 4 cards, got ' + svc.length);
+      const titles = svc.map(c=> c.querySelector('h3')?.textContent.trim());
+      console.assert(titles[0].startsWith('3D-сканирование'), 'Missing: 3D-сканирование');
+      console.assert(titles[1].startsWith('3D-печать'), 'Missing: 3D-печать');
+      console.assert(titles[2].startsWith('Реверс-инжиниринг'), 'Missing: Реверс-инжиниринг');
+      console.assert(titles[3] && titles[3].startsWith('__FOURTH_SERVICE__'.split(' (')[0]), 'Missing: 4th service');
+      const prices = svc.map(c=> c.textContent);
+      console.assert(/от\s?2\s?000\s?₽/i.test(prices[0]), 'Price mismatch for 3D-сканирование');
+      console.assert(/от\s?500\s?₽/i.test(prices[1]), 'Price mismatch for 3D-печать');
+      console.assert(/от\s?5\s?000\s?₽/i.test(prices[2]), 'Price mismatch for Реверс-инжиниринг');
+      console.log('%cServices OK','color:green');
+    }catch(e){ console.warn('Services tests failed:', e); }
+  </script>
+</body>
+</html>
+
