@@ -3,11 +3,13 @@ html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/var(--lh) var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overscroll-behavior-y:none;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(var(--space-3),4vw,var(--space-6))}
+h1,h2,h3,h4,h5,h6{margin:0}
 section{padding:clamp(56px,10vw,96px) 0}
-h1{font-weight:600;letter-spacing:-.02em}
-h2{font-weight:600;letter-spacing:-.01em}
-.muted{color:rgba(0,0,0,.7)}
-.soft{color:rgba(0,0,0,.55)}
+p,li{text-wrap:pretty;hyphens:auto}
+h1{font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+h2{font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.muted{color:var(--muted)}
+.soft{color:var(--soft)}
 .card{border:1px solid var(--line);border-radius:var(--radius);background:transparent;box-shadow:var(--shadow)}
 .card.pad{padding:var(--space-6)}
 .grid{display:grid;gap:var(--space-5)}
@@ -25,5 +27,5 @@ html{scroll-behavior:smooth}
 :root.dark{color-scheme:dark}
 @media (min-width:1024px){:root{--fs:17px}}
 .form input,.form textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:transparent;color:var(--fg)}
-.form input::placeholder,.form textarea::placeholder{color:rgba(0,0,0,.45)}
+.form input::placeholder,.form textarea::placeholder{color:var(--soft)}
 .form input:invalid,.form textarea:invalid{border-color:rgba(255,0,0,.45)}

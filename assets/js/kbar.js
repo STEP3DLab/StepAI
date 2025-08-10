@@ -1,5 +1,6 @@
 (function(){
   const kbar=document.getElementById('kbar');const input=document.getElementById('kbarInput');const list=document.getElementById('kbarList');const btn=document.getElementById('searchBtn');const btnMobile=document.getElementById('ctaSearch');
+  if(!kbar||!input||!list) return;
   let items=[];let sel=0;function build(){items=[{title:'О нас',href:'#about',type:'Раздел'},{title:'Услуги',href:'#services',type:'Раздел'},{title:'Калькулятор',href:'#estimator',type:'Раздел'},{title:'Проекты',href:'#projects',type:'Раздел'},{title:'Блог',href:'#blog',type:'Раздел'},{title:'Контакты',href:'#contact',type:'Раздел'},
     {title:'Сменить тему',action:()=>toggleTheme(),type:'Команда'},{title:'Наверх',action:()=>window.scrollTo({top:0,behavior:'smooth'}),type:'Команда'},{title:'Контакты',href:'#contact',type:'Команда'},{title:'Скопировать ссылку',action:async()=>{await navigator.clipboard.writeText(location.href);toast('Ссылка скопирована');},type:'Команда'}
   ].concat((window.PROJECTS||[]).map(p=>({title:p.title,sub:p.teaser,href:'#projects',type:'Проект'}))).concat((window.POSTS||[]).map(p=>({title:p.title,sub:p.excerpt,href:'#blog',type:'Пост'})));}
