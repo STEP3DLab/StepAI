@@ -2,3 +2,5 @@
 - feat: accessible menu, command palette commands, project modal with JSON, advanced estimator
 - feat: local analytics logger with export/clear
 - docs: add tests, sitemap, robots, GitHub Actions workflows
+- fix: use system font stack and color tokens with accent support
+- fix: estimator self-test uses correct elements
