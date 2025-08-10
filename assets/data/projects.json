@@ -1,8 +1,95 @@
 [
-  {"id":"kawasaki","title":"Композиционный обвес для Kawasaki Puccetti Racing (с Umatex/Росатом)","teaser":"Инжиниринг, CAD и прототипирование элементов обвеса под реальные нагрузки.","tags":["Дизайн","CAD","Печать"],"kpi":["Снижение веса на 18%"],"stack":["CAD","FDM"],"steps":["Сканирование","Моделирование","Печать","Тесты"]},
-  {"id":"bot","title":"Step3D Bot — чат‑бот для заказа 3D‑услуг","teaser":"Интерфейс в Telegram, автооценка и маршрутизация задач.","tags":["VR/AR","Реверс","CAD"],"kpi":["КП за 1–2 минуты"],"stack":["Node","Telegram API"],"steps":["Диалог","API","Интеграции"]},
-  {"id":"xr","title":"Step3D XR — лаборатория VR/AR/MR‑решений","teaser":"Интерактивные демо‑стенды, обучение и промышленный маркетинг.","tags":["VR/AR","Дизайн"],"kpi":[],"stack":["Unity","Blender"],"steps":["Прототип","Тест","Запуск"]},
-  {"id":"reverse","title":"Реверс‑инжиниринг точных деталей","teaser":"Скан → CAD по облаку → анализ отклонений. Полная 2D/3D‑документация.","tags":["Реверс","Сканирование","CAD"],"kpi":[],"stack":["Scanner","CAD"],"steps":["Скан","Совмещение","CAD","Отчёт"]},
-  {"id":"fdm","title":"FDM‑серия корпусов для электроники","teaser":"Стабильная мелкосерия на нескольких принтерах, сборка и постобработка.","tags":["Печать","Дизайн"],"kpi":[],"stack":["FDM"],"steps":["Подготовка","Печать","Сборка"]},
-  {"id":"sla","title":"SLA‑мастер‑модели с высокой детализацией","teaser":"Гладкая поверхность, тонкие стенки, готово под силиконовые формы.","tags":["Печать"],"kpi":[],"stack":["SLA"],"steps":["Моделирование","Печать","Финал"]}
+  {
+    "id": "drone-frame",
+    "title": "Рама квадрокоптера для агромониторинга",
+    "tech": "FDM",
+    "material": "Нейлон с углеволокном",
+    "time": "2 недели",
+    "cost": "45 000 ₽",
+    "image": "https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=60",
+    "description": {
+      "brief": "Нужна лёгкая и жёсткая рама для опытного квадрокоптера.",
+      "process": "Создали CAD-модель, напечатали детали из армированного нейлона, выполнили сборку и балансировку.",
+      "result": "Рама выдержала нагрузку 3 кг и прошла лётные испытания.",
+      "images": [
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=60",
+        "https://images.unsplash.com/photo-1508614985124-74a4a51e4147?auto=format&fit=crop&w=400&q=60"
+      ]
+    },
+    "tags": ["CAD", "Печать"]
+  },
+  {
+    "id": "museum-scan",
+    "title": "3D-скан бюста для музея",
+    "tech": "Сканирование",
+    "material": "—",
+    "time": "3 дня",
+    "cost": "18 000 ₽",
+    "image": "https://images.unsplash.com/photo-1581091215367-59f5d6e4d180?auto=format&fit=crop&w=400&q=60",
+    "description": {
+      "brief": "Музею требуется цифровой архив бюста XIX века.",
+      "process": "Лазерное сканирование, очистка облака точек и построение STL-модели.",
+      "result": "Получена 3D-модель с отклонением менее 0,3 мм, готовая к 3D-печати.",
+      "images": [
+        "https://images.unsplash.com/photo-1581093588401-7e0cdfbbbbb4?auto=format&fit=crop&w=400&q=60"
+      ]
+    },
+    "tags": ["Сканирование", "Реверс"]
+  },
+  {
+    "id": "metal-prototype",
+    "title": "SLA мастер-модель кронштейна",
+    "tech": "SLA",
+    "material": "Фотополимер",
+    "time": "5 дней",
+    "cost": "22 000 ₽",
+    "image": "https://images.unsplash.com/photo-1559027615-624a9c2fa5d5?auto=format&fit=crop&w=400&q=60",
+    "description": {
+      "brief": "Нужна мастер-модель для проверки литейной формы.",
+      "process": "Напечатали деталь на SLA, провели постобработку и примерку в форме.",
+      "result": "Модель одобрена, запуск серийного литья.",
+      "images": [
+        "https://images.unsplash.com/photo-1527430253228-e93688616381?auto=format&fit=crop&w=400&q=60"
+      ]
+    },
+    "tags": ["Печать"]
+  },
+  {
+    "id": "vr-training",
+    "title": "VR‑тренажёр для сварщиков",
+    "tech": "Unity",
+    "material": "—",
+    "time": "1 месяц",
+    "cost": "200 000 ₽",
+    "image": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=400&q=60",
+    "description": {
+      "brief": "Учебный центр хотел тренажёр для отработки навыков сварки без расхода материалов.",
+      "process": "Собрали сцену в Unity, интегрировали VR-оборудование и систему оценки.",
+      "result": "30 студентов прошли курс, расход металла на тренировках снижен на 20%.",
+      "images": [
+        "https://images.unsplash.com/photo-1580910051074-82fefec7d278?auto=format&fit=crop&w=400&q=60",
+        "https://images.unsplash.com/photo-1580910051330-57dc80dbaa64?auto=format&fit=crop&w=400&q=60"
+      ]
+    },
+    "tags": ["VR/AR", "Дизайн"]
+  },
+  {
+    "id": "gear-reverse",
+    "title": "Реверс‑инжиниринг шестерни редуктора",
+    "tech": "CAD",
+    "material": "Сталь",
+    "time": "4 дня",
+    "cost": "25 000 ₽",
+    "image": "https://images.unsplash.com/photo-1518544357471-2ae47d8ad5cb?auto=format&fit=crop&w=400&q=60",
+    "description": {
+      "brief": "Нужно воспроизвести изношенную шестерню редуктора.",
+      "process": "Отсканировали зубья, построили CAD-модель и подготовили чертежи.",
+      "result": "Получена модель с точностью 0,05 мм, изготовлена партия из 3 шестерён.",
+      "images": [
+        "https://images.unsplash.com/photo-1527430253228-e93688616381?auto=format&fit=crop&w=400&q=60",
+        "https://images.unsplash.com/photo-1581093468096-a48ac0be0a44?auto=format&fit=crop&w=400&q=60"
+      ]
+    },
+    "tags": ["Реверс", "CAD", "Сканирование"]
+  }
 ]
