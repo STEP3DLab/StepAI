@@ -42,10 +42,10 @@
         <div style="display:flex;align-items:center;justify-content:space-between"><span>от 5 000 ₽</span><a href="#contact" class="btn" aria-label="Заказать: Реверс-инжиниринг">Заказать ▸</a></div>
       </div>
       <div class="card service">
-        <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>__FOURTH_SERVICE__</h3>
-        <div class="soft">__FOURTH_SUBTITLE__</div>
+        <h3 style="display:flex;align-items:center;gap:8px"><svg class="ico svc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>Постобработка</h3>
+        <div class="soft">Шлифовка и покраска</div>
         <div class="sep"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span>__FOURTH_PRICE__</span><a href="#contact" class="btn" aria-label="Заказать: __FOURTH_SERVICE__">Заказать ▸</a></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span>от 1 500 ₽</span><a href="#contact" class="btn" aria-label="Заказать: Постобработка">Заказать ▸</a></div>
       </div>
     </div>
   </section>
@@ -75,12 +75,13 @@
       console.assert(titles[0].startsWith('3D-сканирование'), 'Missing: 3D-сканирование');
       console.assert(titles[1].startsWith('3D-печать'), 'Missing: 3D-печать');
       console.assert(titles[2].startsWith('Реверс-инжиниринг'), 'Missing: Реверс-инжиниринг');
-      console.assert(titles[3] && titles[3].startsWith('__FOURTH_SERVICE__'.split(' (')[0]), 'Missing: 4th service');
+      console.assert(titles[3] && titles[3].startsWith('Постобработка'), 'Missing: Постобработка');
       const prices = svc.map(c=> c.textContent);
       console.assert(/от\s?2\s?000\s?₽/i.test(prices[0]), 'Price mismatch for 3D-сканирование');
       console.assert(/от\s?500\s?₽/i.test(prices[1]), 'Price mismatch for 3D-печать');
-    console.assert(/от\s?5\s?000\s?₽/i.test(prices[2]), 'Price mismatch for Реверс-инжиниринг');
-    console.log('%cServices OK','color:green');
+      console.assert(/от\s?5\s?000\s?₽/i.test(prices[2]), 'Price mismatch for Реверс-инжиниринг');
+      console.assert(/от\s?1\s?500\s?₽/i.test(prices[3]), 'Price mismatch for Постобработка');
+      console.log('%cServices OK','color:green');
   }catch(e){ console.warn('Services tests failed:', e); }
 
     // blog reader self-tests
