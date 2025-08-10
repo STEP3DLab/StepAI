@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "fdm-vs-sla-vs-sls",
+    "title": "Как выбрать 3D-печать: FDM vs SLA vs SLS",
+    "date": "2024-08-01",
+    "summary": "Сравнение трёх основных технологий 3D-печати.",
+    "cover": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzUwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nNTAnIGZpbGw9J2RnJyAvPjwvc3ZnPg==",
+    "keywords": ["3D-печать", "FDM", "SLA", "SLS"]
+  },
+  {
+    "slug": "stl-prep",
+    "title": "Как подготовить STL к печати: толщина стенок, заполнение, слой",
+    "date": "2024-08-10",
+    "summary": "Быстрые советы по подготовке модели к печати.",
+    "cover": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzUwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nNTAnIGZpbGw9J2RnJyAvPjwvc3ZnPg==",
+    "keywords": ["STL", "подготовка", "3D-печать"]
+  },
+  {
+    "slug": "3d-scan-moscow",
+    "title": "3D-сканирование в Москве: кейсы, сроки, цена",
+    "date": "2024-08-15",
+    "summary": "Чем полезно сканирование и сколько это стоит.",
+    "cover": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzUwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nNTAnIGZpbGw9J2RnJyAvPjwvc3ZnPg==",
+    "keywords": ["3D-сканирование", "Москва"]
+  }
+]
